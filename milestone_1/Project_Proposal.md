@@ -1,7 +1,5 @@
 # Project Proposal
 
-**Here, we will add our proposal**
-
 ## 1. Source of data
 
 
