@@ -169,6 +169,36 @@ def get_text(page_soup):
     return "\n".join(text)
             
 
+def shuffle(src_path, subfolders=["Badr", "Oksana", "Sneha", "Utkarsh"]):
+    """
+    Shuffles the documents at the specified and moves them to
+    specified subfolders
+
+    Parameters
+    ----------
+    src_path : str
+        path to the folder where documents are to be shuffled
+    subfolders : list, optional
+        list of subfolders among which the documents are to be randomly
+        distributed. The default is ["Badr", "Oksana", "Sneha", "Utkarsh"]
+    """
+    filenames = glob.glob(src_path + "/*")
+    random.shuffle(filenames)
+    
+    for i, subfolder in enumerate(subfolders):
+        target_path = os.path.join(src_path, subfolder)
+        
+        if not os.path.exists(target_path):
+            os.makedirs(target_path)
+        
+        n_docs_p_person = len(filenames) // len(subfolders)
+        
+        for src_file in filenames[i * n_docs_p_person: (i + 1) * n_docs_p_person]:
+            shutil.move(src_file, src_file.replace(src_path, target_path))
+    
+    log(f"Documents shuffled among {subfolders}")
+
+
 # Referred stackoverflow
 def zipdir(path, filename):
     """
@@ -234,5 +264,7 @@ if __name__ == "__main__":
                 log(f"Skipping document with size {len(text)}...")
         except:
             log(f"Failed extracting text from document {i}")
+    
+    shuffle(JUDGEMENTS_FOLDER)
     
     zipdir(JUDGEMENTS_FOLDER, os.path.join(DATA_FOLDER, "judgements.zip"))
