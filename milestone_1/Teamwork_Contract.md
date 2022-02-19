@@ -5,27 +5,27 @@
 
 #### Meeting 1
 
-  What: To talk on week’s milestone and plan our roadmap
+  What: To talk on the week’s milestone and plan our roadmap
 
-  When: Monday at lab time at 2pm
+  When: Monday, 2pm (Lab time)
 
-  Duration:  30 minutes
+  Duration: 30 minutes
 
-  Who: all team
+  Who: All Team Members
 
-  Action points: the meeting should end up with have action points for each person
+  Action points: the meeting should end up with have action items for each person
 
 #### Meeting 2
 
-  What: Pre-mentor meeting (To talk through what have we done, what questions we have and prepare questions/ideas/etc to our meeting with mentor)
+  What: Pre-mentor meeting (To talk through what have we done, what questions we have and prepare questions/ideas/etc to discuss with our mentor during the meeting)
 
   When: Thursday evening (flexibility - at least a day before mentor meeting)
 
-  Duration:1 hour
+  Duration: 1 hour
 
-  Who: all team
+  Who: All Team Members
 
-  Action points: clarity on what we should present to the mentor and prepare questions for the mentor
+  Action points: clarity on what is to be discussed with the mentor
 
 
 #### Meeting 3
@@ -34,22 +34,22 @@
 
   When: Friday 11:00 (depends on mentor)
 
-  Duration: 30 min
+  Duration: 30 minutes
 
-  Who: all team
+  Who: All Team Members and Mentor
 
 
 #### Meeting 4
 
   What: Post-mentor meeting (if required)
 
-  When: (depends on mentor schedule)
+  When: After our discussion with the mentor
 
-  Duration: 30 min
+  Duration: 30 minutes
 
-  Who: all team
+  Who: All Team Members
 
-  Action points: decide on the next course of action after mentor’s suggestion
+  Action points: decide on the next course of action after mentor’s suggestions
 
 
 #### Meeting 5
@@ -60,9 +60,9 @@
 
   Duration: 30 minutes
 
-  Who: all team
+  Who: All Team Members
 
-  Action points: responsible person for the week review milestone of the week
+  Action points: Responsible person for the week to review milestone of the week before submission
 
 
 ## How we will communicate?
@@ -89,24 +89,24 @@ Project Manager should:
 - No person shall assault another person.
 
 **Team membership as coworkers:**
-- all team members are equal; 
-- every team member’s opinion will be thoughtfully considered; 
-- each team member will keep all commitments by the agreed upon due date; 
-- each team member agrees to constantly assess whether team members are honouring their commitment to the team norms. 
+- All team members are equal; 
+- Every team member’s opinion will be thoughtfully considered; 
+- Each team member will keep all commitments by the agreed upon due date; 
+- Each team member agrees to constantly assess whether team members are honouring their commitment to the team norms. 
 
 **Team member communication:** 
-- team members will speak respectfully to each other; 
-- will not talk down to each other; 
-- will positively recognize and thank each other for team contributions. 
+- Team members will speak respectfully to each other; 
+- No one not talk down to each other; 
+- Everyone positively recognize and thank each other for team contributions. 
 
 **Team member interaction in meetings:** 
-- team members will listen without interrupting; 
-- hold no side or competing conversations; 
-- follow the rules for effective meetings; 
-- attend the meetings on time; 
-- always work from an agenda; 
-- notes with action points will be recorded at each meeting; 
-- end meetings on time. 
+- Team members will listen without interrupting; 
+- No one should hold sides or compete during conversations; 
+- Follow the rules for effective meetings; 
+- Attend the meetings on time; 
+- Always work from an agenda; 
+- Notes with action points will be recorded at each meeting; 
+- End meetings on time. 
 
 **Team organization and function:**
 
@@ -121,9 +121,9 @@ week 3 - Badr Jaidi
 week 4 - Utkarsh Saboo
 
 **Team communication with mentor:** 
-- team members will make certain they have agreement on what and when to communicate; 
-- complaints about team members will be addressed first in the team.  
+- Team Members will make certain they have agreement on what and when to communicate; 
+- Complaints about team members will be addressed first in the team.  
 
 **Team problem solving, conflict resolution and decision making:** 
-- team members will make decisions by consensus, but majority will rule if timely consensus is not reached; 
-- conflicts will be resolved directly with the persons in conflict. 
+- Team Members will make decisions by consensus, but majority will rule if timely consensus is not reached; 
+- Conflicts will be resolved directly with the persons in conflict. 
