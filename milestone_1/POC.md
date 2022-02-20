@@ -9,7 +9,7 @@ We plan to build a corpus of legal documents with named entities tagged. Here is
         - `create_url_dict()`: This method looks for cases and their urls as per the year and court type parameters and saves them as a json file in the data folder
         - `get_paragraph_text()`: Extracts all the text in free paragraphs
         - `get_text()`: It takes in a bs4 object and converts it into text by looking for all the free text in the page
-        - Other helper methods to shuffle document for annotation among the group members, zip documents, logging, etc
+        - Other helper methods to shuffle documents for annotation among the group members, zip documents, logging, etc
 
 2. We will use [RASA-NLU](https://rasahq.github.io/rasa-nlu-trainer) to annotate these documents with the named entities
     - Here is a list of entities we identified:
