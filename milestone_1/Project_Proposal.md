@@ -35,7 +35,7 @@ The **Provincial Court of British Columbia** is a trial level court in British C
 
 ### 3.1 Named Entity Recognition
 
-For Named Entity Tags, we are looking to tag the following entities :
+For Named Entity Tags, we are looking to tag the following entities:
 
 `COURT_NAME` - type of a court (the Court of Appeal, the Supreme Court, the Provincial Court)
 
@@ -64,9 +64,6 @@ As an annotation tool, we will be using RASA (https://rasahq.github.io/rasa-nlu-
 Coreference resolution is the task of finding all expressions that refer to the same entity in a text. Since legal documents use a lot of pronouns while discussing case proceedings referring to either the appellant , respondent or other. We would be resolving these pronouns and tagging them with their respective named entity tags.
 
 
-## 4. POC: A plan on collecting the entire corpus
+## 4. POC: A plan on building corpus of Legal documents
 
-We have written a python script to scrape the website mentioned above and have successfully accomplished collecting the entire corpus of 400 court judgment documents.
-
-
-
+We have written a python script to scrape the website mentioned above and have successfully accomplished collecting the entire corpus of 400 court judgment documents. Please refer `POC.md` for more details.
