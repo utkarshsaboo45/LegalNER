@@ -27,3 +27,10 @@ We plan to build a corpus of legal documents with named entities tagged. Here is
 3. We also plan to annotate pronouns with the person name they refer to in the coming weeks.
 
 4. As the last step, we will build a web interface which can be used by users to view these tagged entities discussed above.
+
+## How to reproduce results for Milestone 1:
+
+- Delete all the other files in the [src](https://github.ubc.ca/us45/COLX_523_group3/tree/master/src) folder excluding [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py)
+- Execute [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py). It will fetch all the urls from the court website, save the judgements to txt files, shuffle and zip them to judgements.zip
+
+Note: The number of files to be downloaded, restrictions (required document length range) and search criterion can be changed within [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py)
