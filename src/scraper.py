@@ -44,7 +44,7 @@ def log(message, echo=True):
     """
     if echo:
         print(message)
-    with open("logs.txt", "a") as log_file:
+    with open("logs.txt", "a", encoding="utf-8") as log_file:
         log_file.write(message + "\n")
 
 
@@ -114,7 +114,7 @@ def create_url_dict(
     if not os.path.exists(DATA_FOLDER):
         os.makedirs(DATA_FOLDER)
     
-    with open(URL_DICT_PATH, "w") as f:
+    with open(URL_DICT_PATH, "w", encoding="utf-8") as f:
         json.dump(url_dict, f)
     
     log("Urls saved in data/url_dict.json.")
@@ -226,7 +226,7 @@ def zipdir(path, filename):
 if __name__ == "__main__":
     if not os.path.exists(URL_DICT_PATH):
         create_url_dict(
-            year_search_params=list(range(1990, 2023))
+            #year_search_params=list(range(1990, 2023))
         )
 
     with open(URL_DICT_PATH) as f:
@@ -242,16 +242,16 @@ if __name__ == "__main__":
             log(f"\nMaximum limit of {MAX_FILES} documents reached. Stopping...")
             break
         
-        log(f"Fetching file {i + 1} out of {len(url_dict.items())} ...")
+        log(f"Fetching file {i + 1} out of {len(url_dict.items())}...")
         page_soup = BeautifulSoup(urlopen(case_url), "html.parser")
         try:
-            text = get_text(page_soup)
+            text = re.sub("[^\S\r\n]+", " ", get_text(page_soup))
         
             if len(text) > JUDGEMENT_CHARACTER_LOWER_LIMIT and len(text) < JUDGEMENT_CHARACTER_UPPER_LIMIT:
                 file_name = slugify(case_name) + ".txt"
                 
-                with open(os.path.join(JUDGEMENTS_FOLDER, file_name), "w") as f:
-                    f.write(re.sub("[^\S\r\n]+", " ", text))
+                with open(os.path.join(JUDGEMENTS_FOLDER, file_name), "w", encoding="utf-8") as f:
+                    f.write(text)
                 
                 file_count += 1
                 
@@ -263,7 +263,7 @@ if __name__ == "__main__":
             else:
                 log(f"Skipping document with size {len(text)}...")
         except:
-            log(f"Failed extracting text from document {i}")
+            log(f"Failed extracting text from document {i + 1}")
     
     shuffle(JUDGEMENTS_FOLDER)
     
