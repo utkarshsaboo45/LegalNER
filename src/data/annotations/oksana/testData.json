@@ -12,12 +12,6 @@
             "entity": "COURT_NAME"
           },
           {
-            "start": 51,
-            "end": 90,
-            "value": "1449 Sandhurst Place Holdings Ltd. (Re)",
-            "entity": "CITATION"
-          },
-          {
             "start": 273,
             "end": 307,
             "value": "The Honourable Mr. Justice Milman ",
@@ -266,7 +260,7 @@
           {
             "start": 963,
             "end": 973,
-            "value": "Sandhurst’",
+            "value": "Sandhurst",
             "entity": "PERS_APPELLANT"
           },
           {
@@ -490,6 +484,12 @@
             "end": 2387,
             "value": "s. 324 of the  Business Corporations  Act , S.B.C. 2002, c. 57",
             "entity": "SECTION"
+          },
+          {
+            "start": 51,
+            "end": 106,
+            "value": "1449 Sandhurst Place Holdings Ltd. (Re),   2022 BCSC 62",
+            "entity": "CITATION"
           }
         ]
       },
@@ -502,12 +502,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 84,
-            "value": "A.M.S. v. J.R.A.",
-            "entity": "CITATION"
           },
           {
             "start": 151,
@@ -782,7 +776,7 @@
           {
             "start": 4391,
             "end": 4397,
-            "value": "Ms. A'",
+            "value": "Ms. A",
             "entity": "PERS_RESPONDENT"
           },
           {
@@ -946,6 +940,12 @@
             "end": 11357,
             "value": "s. 61(2)(g) ",
             "entity": "SECTION"
+          },
+          {
+            "start": 51,
+            "end": 84,
+            "value": "A.M.S. v. J.R.A.,   2022 BCSC 211",
+            "entity": "CITATION"
           }
         ]
       },
@@ -958,12 +958,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 104,
-            "value": "British Columbia (Director of Civil Forfeiture) v. Vu",
-            "entity": "CITATION"
           },
           {
             "start": 617,
@@ -1462,6 +1456,12 @@
             "end": 16130,
             "value": "Applicant",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 121,
+            "value": "British Columbia (Director of Civil Forfeiture) v. Vu,   2020 BCSC 106",
+            "entity": "CITATION"
           }
         ]
       },
@@ -1474,12 +1474,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 65,
-            "value": "Chiodo v. John Doe",
-            "entity": "CITATION"
           },
           {
             "start": 122,
@@ -1954,6 +1948,12 @@
             "end": 6332,
             "value": "s. 8(1) of the  Judicial Review Procedure Act ,  R.S.B.C. 1996, c. 241",
             "entity": "SECTION"
+          },
+          {
+            "start": 47,
+            "end": 81,
+            "value": "Chiodo v. John Doe,   2022 BCCA 33",
+            "entity": "CITATION"
           }
         ]
       },
@@ -1966,12 +1966,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 85,
-            "value": "Farren v. Elite Service Group Inc.",
-            "entity": "CITATION"
           },
           {
             "start": 163,
@@ -2854,6 +2848,12 @@
             "end": 14921,
             "value": "Elite",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 101,
+            "value": "Farren v. Elite Service Group Inc.,   2020 BCSC 23",
+            "entity": "CITATION"
           }
         ]
       },
@@ -2866,12 +2866,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 62,
-            "value": "Hanlon (Re)",
-            "entity": "CITATION"
           },
           {
             "start": 241,
@@ -3382,6 +3376,12 @@
             "end": 14029,
             "value": "Justice  Potts",
             "entity": "PERS_JUDGE"
+          },
+          {
+            "start": 51,
+            "end": 78,
+            "value": "Hanlon (Re),   2021 BCSC 40",
+            "entity": "CITATION"
           }
         ]
       },
@@ -3394,12 +3394,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 65,
-            "value": "Henderson v. Mawji",
-            "entity": "CITATION"
           },
           {
             "start": 149,
@@ -3498,9 +3492,15 @@
             "entity": "PERS_JUDGE"
           },
           {
-            "start": 512,
-            "end": 529,
-            "value": "Csurdi  v. Bannon",
+            "start": 47,
+            "end": 81,
+            "value": "Henderson v. Mawji,   2020 BCCA 43",
+            "entity": "CITATION"
+          },
+          {
+            "start": 511,
+            "end": 546,
+            "value": " Csurdi  v. Bannon , 2019 BCSC 2280",
             "entity": "CITATION"
           }
         ]
@@ -3514,12 +3514,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 67,
-            "value": "Jiwani v. Jiwani",
-            "entity": "CITATION"
           },
           {
             "start": 145,
@@ -3946,6 +3940,12 @@
             "end": 9101,
             "value": "Ms. Jiwani",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 83,
+            "value": "Jiwani v. Jiwani,   2022 BCSC 95",
+            "entity": "CITATION"
           }
         ]
       },
@@ -4084,12 +4084,6 @@
             "end": 1886,
             "value": "s. 41(f) of that  Act",
             "entity": "SECTION"
-          },
-          {
-            "start": 409,
-            "end": 426,
-            "value": "K.F.M. v. K.G.T. ",
-            "entity": "CITATION"
           },
           {
             "start": 1226,
@@ -4276,6 +4270,18 @@
             "end": 9996,
             "value": "Mother",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 47,
+            "end": 79,
+            "value": "K.F.M. v. K.G.T.,   2020 BCCA 10",
+            "entity": "CITATION"
+          },
+          {
+            "start": 409,
+            "end": 441,
+            "value": "K.F.M. v. K.G.T. , 2019 BCCA 339",
+            "entity": "CITATION"
           }
         ]
       },
@@ -4288,12 +4294,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 67,
-            "value": "Knowles v. Brown",
-            "entity": "CITATION"
           },
           {
             "start": 148,
@@ -4420,6 +4420,12 @@
             "end": 7460,
             "value": "Justice",
             "entity": "PERS_JUDGE"
+          },
+          {
+            "start": 51,
+            "end": 84,
+            "value": "Knowles v. Brown,   2022 BCSC 154",
+            "entity": "CITATION"
           }
         ]
       },
@@ -4612,6 +4618,18 @@
             "end": 12014,
             "value": "The Honourable Mr. Justice Abrioux",
             "entity": "PERS_JUDGE"
+          },
+          {
+            "start": 47,
+            "end": 79,
+            "value": "Liapis v. Keshow,   2020 BCCA 28",
+            "entity": "CITATION"
+          },
+          {
+            "start": 534,
+            "end": 579,
+            "value": "Liapis v. Keshow , Vancouver Registry E162841",
+            "entity": "CITATION"
           }
         ]
       },
@@ -4624,12 +4642,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 68,
-            "value": "Masjoody v. Trotignon",
-            "entity": "CITATION"
           },
           {
             "start": 125,
@@ -4678,12 +4690,6 @@
             "end": 821,
             "value": "February 1, 2022",
             "entity": "DATE_JUDGEMENT"
-          },
-          {
-            "start": 439,
-            "end": 460,
-            "value": "Masjoody v. Trotignon",
-            "entity": "CITATION"
           },
           {
             "start": 1991,
@@ -4894,6 +4900,18 @@
             "end": 1646,
             "value": "Simon Fraser University",
             "entity": "PERS_COUNS_RESP"
+          },
+          {
+            "start": 47,
+            "end": 84,
+            "value": "Masjoody v. Trotignon,   2022 BCCA 48",
+            "entity": "CITATION"
+          },
+          {
+            "start": 439,
+            "end": 477,
+            "value": "Masjoody v. Trotignon , 2021 BCSC 1502",
+            "entity": "CITATION"
           }
         ]
       },
@@ -4906,12 +4924,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 87,
-            "value": "Mau v. G.A. Consulting Services Inc.",
-            "entity": "CITATION"
           },
           {
             "start": 444,
@@ -5014,6 +5026,12 @@
             "end": 5408,
             "value": "Mr. MacKenzie",
             "entity": "PERS_COUNS_APPEL"
+          },
+          {
+            "start": 51,
+            "end": 104,
+            "value": "Mau v. G.A. Consulting Services Inc.,   2020 BCSC 125",
+            "entity": "CITATION"
           }
         ]
       },
@@ -5026,12 +5044,6 @@
             "end": 41,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA ",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 131,
-            "value": "Peninsula (Kingsway) Seafood Restaurant Inc. v. Central   Park Developments Ltd.",
-            "entity": "CITATION"
           },
           {
             "start": 211,
@@ -5464,6 +5476,12 @@
             "end": 1749,
             "value": "s. 24 of the  Law and Equity Act , R.S.B.C.  1996, c. 253",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 148,
+            "value": "Peninsula (Kingsway) Seafood Restaurant Inc. v. Central   Park Developments Ltd.,   2021 BCSC 119",
+            "entity": "CITATION"
           }
         ]
       },
@@ -5476,12 +5494,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 59,
-            "value": "R. v. Danjou",
-            "entity": "CITATION"
           },
           {
             "start": 115,
@@ -5782,6 +5794,12 @@
             "end": 279,
             "value": "s. 517(1)  of the  Criminal Code",
             "entity": "SECTION"
+          },
+          {
+            "start": 47,
+            "end": 75,
+            "value": "R. v. Danjou,   2019 BCCA 16",
+            "entity": "CITATION"
           }
         ]
       },
@@ -5848,18 +5866,6 @@
             "end": 1003,
             "value": "the Supreme Court of British  Columbia",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 1031,
-            "end": 1045,
-            "value": "R. v. Horswill",
-            "entity": "CITATION"
-          },
-          {
-            "start": 1125,
-            "end": 1140,
-            "value": "R. v. Horswill ",
-            "entity": "CITATION"
           },
           {
             "start": 1217,
@@ -6100,6 +6106,24 @@
             "end": 17974,
             "value": "Mr. Horswill",
             "entity": "PERS_APPELLANT"
+          },
+          {
+            "start": 48,
+            "end": 77,
+            "value": "R. v. Horswill,   2019 BCCA 2",
+            "entity": "CITATION"
+          },
+          {
+            "start": 1031,
+            "end": 1092,
+            "value": "R. v. Horswill,  2017 BCSC 35,   Prince George Registry 37592",
+            "entity": "CITATION"
+          },
+          {
+            "start": 1125,
+            "end": 1185,
+            "value": "R. v. Horswill , 2017 BCSC 160, Prince George Registry 37592",
+            "entity": "CITATION"
           }
         ]
       },
@@ -6112,12 +6136,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 64,
-            "value": "R. v. Huntley",
-            "entity": "CITATION"
           },
           {
             "start": 125,
@@ -6550,6 +6568,12 @@
             "end": 14033,
             "value": "Mr. Huntley",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 81,
+            "value": "R. v. Huntley,   2021 BCSC 149",
+            "entity": "CITATION"
           }
         ]
       },
@@ -6562,12 +6586,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 64,
-            "value": "R. v. Latimer",
-            "entity": "CITATION"
           },
           {
             "start": 132,
@@ -6868,6 +6886,12 @@
             "end": 7999,
             "value": "s. 495(1)(a) of the  Criminal Code,  R.S.C.  1985 c. C-46",
             "entity": "SECTION"
+          },
+          {
+            "start": 51,
+            "end": 82,
+            "value": "R. v. Latimer,   2020 BCSC 970 ",
+            "entity": "CITATION"
           }
         ]
       },
@@ -6880,12 +6904,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 58,
-            "value": "R. v. Lloyd",
-            "entity": "CITATION"
           },
           {
             "start": 115,
@@ -6922,12 +6940,6 @@
             "end": 357,
             "value": "the Provincial Court of British Columbia",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 431,
-            "end": 442,
-            "value": "R. v. Lloyd",
-            "entity": "CITATION"
           },
           {
             "start": 531,
@@ -7042,6 +7054,18 @@
             "end": 3783,
             "value": "s. 8 of the  Charter",
             "entity": "SECTION"
+          },
+          {
+            "start": 47,
+            "end": 74,
+            "value": "R. v. Lloyd,   2019 BCCA 25",
+            "entity": "CITATION"
+          },
+          {
+            "start": 430,
+            "end": 475,
+            "value": " R. v. Lloyd , Vancouver  Registry 233735-2-C",
+            "entity": "CITATION"
           }
         ]
       },
@@ -7054,12 +7078,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 57,
-            "value": "R. v. N.P.",
-            "entity": "CITATION"
           },
           {
             "start": 114,
@@ -7170,12 +7188,6 @@
             "entity": "DATE_JUDGEMENT"
           },
           {
-            "start": 1277,
-            "end": 1289,
-            "value": "R. v. [N.P.]",
-            "entity": "CITATION"
-          },
-          {
             "start": 1643,
             "end": 1647,
             "value": "N.P.",
@@ -7228,6 +7240,18 @@
             "end": 12068,
             "value": "Mr. Melling",
             "entity": "PERS_COUNS_RESP"
+          },
+          {
+            "start": 47,
+            "end": 73,
+            "value": "R. v. N.P.,   2021 BCCA 25",
+            "entity": "CITATION"
+          },
+          {
+            "start": 1277,
+            "end": 1315,
+            "value": "R. v. [N.P.] , Cranbrook Docket 3834-1",
+            "entity": "CITATION"
           }
         ]
       },
@@ -7240,12 +7264,6 @@
             "end": 36,
             "value": "COURT OF APPEAL FOR BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 47,
-            "end": 59,
-            "value": "R. v. Veeken",
-            "entity": "CITATION"
           },
           {
             "start": 116,
@@ -7420,6 +7438,12 @@
             "end": 11321,
             "value": "The Honourable Mr. Justice Fitch",
             "entity": "PERS_JUDGE"
+          },
+          {
+            "start": 47,
+            "end": 75,
+            "value": "R. v. Veeken,   2020 BCCA 54",
+            "entity": "CITATION"
           }
         ]
       },
@@ -7434,22 +7458,10 @@
             "entity": "COURT_NAME"
           },
           {
-            "start": 48,
-            "end": 115,
-            "value": "Thomson v. Her Majesty the Queen in the Right of   British Columbia",
-            "entity": "CITATION"
-          },
-          {
             "start": 172,
             "end": 188,
             "value": "Neil  E. Thomson",
             "entity": "PERS_APPELLANT"
-          },
-          {
-            "start": 60,
-            "end": 115,
-            "value": "er Majesty the Queen in the Right of   British Columbia",
-            "entity": "PERS_RESPONDENT"
           },
           {
             "start": 272,
@@ -7492,12 +7504,6 @@
             "end": 549,
             "value": "the Supreme Court of British Columbia",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 576,
-            "end": 622,
-            "value": "Thomson  v. British Columbia (Interior Health)",
-            "entity": "CITATION"
           },
           {
             "start": 729,
@@ -7690,6 +7696,24 @@
             "end": 2557,
             "value": "Royal Inland Hospital ",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 48,
+            "end": 131,
+            "value": "Thomson v. Her Majesty the Queen in the Right of   British Columbia,   2022 BCCA 38",
+            "entity": "CITATION"
+          },
+          {
+            "start": 576,
+            "end": 639,
+            "value": "Thomson  v. British Columbia (Interior Health) , 2020 BCSC 1591",
+            "entity": "CITATION"
+          },
+          {
+            "start": 48,
+            "end": 115,
+            "value": "Thomson v. Her Majesty the Queen in the Right of   British Columbia",
+            "entity": "PERS_RESPONDENT"
           }
         ]
       },
@@ -7702,12 +7726,6 @@
             "end": 41,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA ",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 125,
-            "value": "Trans Canada Insurance Marketing Inc. v. Fransen   Insurance Services Ltd.",
-            "entity": "CITATION"
           },
           {
             "start": 202,
@@ -8158,6 +8176,12 @@
             "end": 11960,
             "value": "InsureBC",
             "entity": "PERS_RESPONDENT"
+          },
+          {
+            "start": 51,
+            "end": 140,
+            "value": "Trans Canada Insurance Marketing Inc. v. Fransen   Insurance Services Ltd.,   2020 BCSC 8",
+            "entity": "CITATION"
           }
         ]
       },
@@ -8278,6 +8302,18 @@
             "end": 4612,
             "value": "Madam  Justice Rowles",
             "entity": "PERS_JUDGE"
+          },
+          {
+            "start": 47,
+            "end": 75,
+            "value": "Wang v. Shao,   2019 BCCA 52",
+            "entity": "CITATION"
+          },
+          {
+            "start": 404,
+            "end": 432,
+            "value": "Wang v. Shao , 2018 BCSC 377",
+            "entity": "CITATION"
           }
         ]
       },
@@ -8290,12 +8326,6 @@
             "end": 40,
             "value": "THE SUPREME COURT OF BRITISH COLUMBIA",
             "entity": "COURT_NAME"
-          },
-          {
-            "start": 51,
-            "end": 100,
-            "value": "Woo v. Crème De La Crumb Bakeshop & Catering Ltd.",
-            "entity": "CITATION"
           },
           {
             "start": 178,
@@ -8452,6 +8482,12 @@
             "end": 18799,
             "value": "ss. 7 and 8",
             "entity": "SECTION"
+          },
+          {
+            "start": 51,
+            "end": 116,
+            "value": "Woo v. Crème De La Crumb Bakeshop & Catering Ltd.,   2020 BCSC 42",
+            "entity": "CITATION"
           }
         ]
       }
