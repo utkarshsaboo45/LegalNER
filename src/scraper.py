@@ -2,6 +2,7 @@ import os
 import re
 import time
 import json
+import codecs
 import glob
 import shutil
 import random
@@ -331,5 +332,5 @@ if __name__ == "__main__":
     path_rasa, path_ls, merged_output_path = "f2.json", "f1.json", "merged.json"
 
     merged_dict_list = merge(path_rasa, path_ls)
-    with open(merged_output_path, "w", encoding="utf-8-sig") as f:
-        json.dump(merged_dict_list, f, indent=4)
+    with codecs.open(merged_output_path, "w", encoding="utf-8") as f:
+        json.dump(merged_dict_list, f, indent=4, ensure_ascii=False)
