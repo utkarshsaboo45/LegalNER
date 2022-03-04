@@ -48,7 +48,13 @@ We aim to annotate around 100 legal documents before the next milestone. The est
 
 ### 2.4 Evaluation of Annotation Quality
 
-We will be dividing ourselves into two groups each of two team members. Each member of each group will complete annotating their assigned documents and check also do a quality check of the annotated documents of the other team member in the group. This way we can ensure a four eyed quality check for our annotations.
+Here are a few things we are planning to do in order to evaluate our annotation quality :
+
+1) Each member of the group will work on annotating their assigned documents and also do a quality check of the documents annotated by every other team member in the group. This way we can ensure a thorough quality check for our annotations. Basically, every team member will annotate 25 documents and will review 75 documents.
+
+2) In case of any conflicts during the annotation review process, we will consider the opinion of majority of the team members and go ahead with that.
+
+3) We are also planning to overlap a few documents that we would be annotating in order to calculate the inter annotator agreement score which can help us evaluate the quality of our annotation in other documents and also understand how many entities are tagged correctly.
 
 ## 3. Pilot Study
 
