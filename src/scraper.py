@@ -222,7 +222,7 @@ def zipdir(path, filename):
 
     ziph.close()
     log("Judgements zipped.")
-
+    
 
 def merge(path_rasa, path_ls):
     """
@@ -284,9 +284,7 @@ def merge(path_rasa, path_ls):
 
 if __name__ == "__main__":
     if not os.path.exists(URL_DICT_PATH):
-        create_url_dict(
-            #year_search_params=list(range(1990, 2023))
-        )
+        create_url_dict()
 
     with open(URL_DICT_PATH) as f:
         url_dict = json.load(f)
@@ -297,20 +295,25 @@ if __name__ == "__main__":
         os.makedirs(JUDGEMENTS_FOLDER)
     
     for i, (case_name, case_url) in enumerate(url_dict.items()):
+        file_name = slugify(case_name) + ".txt"
+        file_path = os.path.join(JUDGEMENTS_FOLDER, file_name)
+
         if file_count == MAX_FILES:
             log(f"\nMaximum limit of {MAX_FILES} documents reached. Stopping...")
             break
-        
+
+        if os.path.exists(file_path):
+            log(f"File {file_name} already exists, skipping...")
+            continue
+
         log(f"Fetching file {i + 1} out of {len(url_dict.items())}...")
         page_soup = BeautifulSoup(urlopen(case_url), "html.parser")
         try:
             text = re.sub("[^\S\r\n]+", " ", get_text(page_soup))
         
             if len(text) > JUDGEMENT_CHARACTER_LOWER_LIMIT and len(text) < JUDGEMENT_CHARACTER_UPPER_LIMIT:
-                file_name = slugify(case_name) + ".txt"
                 
-                with open(os.path.join(JUDGEMENTS_FOLDER, file_name), "w", encoding="utf-8") as f:
-                    f.write(text)
+                with open(file_path, "w", encoding="utf-8") as f:
                 
                 file_count += 1
                 
@@ -328,9 +331,3 @@ if __name__ == "__main__":
     
     zipdir(JUDGEMENTS_FOLDER, os.path.join(DATA_FOLDER, "judgements.zip"))
 
-    # Merge RASA and Label-Studio output jsons
-    path_rasa, path_ls, merged_output_path = "f2.json", "f1.json", "merged.json"
-
-    merged_dict_list = merge(path_rasa, path_ls)
-    with codecs.open(merged_output_path, "w", encoding="utf-8") as f:
-        json.dump(merged_dict_list, f, indent=4, ensure_ascii=False)
