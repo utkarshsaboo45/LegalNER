@@ -223,6 +223,64 @@ def zipdir(path, filename):
     log("Judgements zipped.")
     
 
+def merge(path_rasa, path_ls):
+    """
+    A helper method to merge output dictionaries from RASA and Label-Studio
+
+    Parameters
+    ----------
+    path_rasa : str
+        path to the RASA JSON outut file.
+    path_ls : str
+        path to the Label-Studio output file.
+
+    Returns
+    -------
+    export_dict_list : list
+        A merged list of dictionaries with all document texts and entities from
+        the RASA and Label-studio JSON files.
+
+    """
+    with open(path_rasa, encoding="utf-8-sig") as f:
+        dict_rasa = json.load(f)
+    with open(path_ls, encoding="utf-8") as f:
+        dict_ls = json.load(f)
+
+    export_dict_list = list()
+
+    for doc in dict_rasa["rasa_nlu_data"]["common_examples"]:
+        entities = list()
+        for entity in doc["entities"]:
+            entities.append({
+                "start": entity["start"],
+                "end": entity["end"],
+                "value": entity["value"],
+                "entity": entity["entity"],
+            })
+
+        export_dict_list.append({
+            "text": doc["text"].encode('unicode-escape').replace(b'\\\\', b'\\').decode('unicode-escape'),
+            "entities": entities
+        })
+
+    for doc in dict_ls:
+        entities = list()
+        for entity in doc["label"]:
+            entities.append({
+                "start": entity["start"],
+                "end": entity["end"],
+                "value": entity["text"],
+                "entity": entity["labels"][0],
+            })
+
+        export_dict_list.append({
+            "text": doc["text"].encode('unicode-escape').decode('unicode-escape'),
+            "entities": entities
+        })
+
+    return export_dict_list    
+    
+
 if __name__ == "__main__":
     if not os.path.exists(URL_DICT_PATH):
         create_url_dict()
@@ -255,7 +313,6 @@ if __name__ == "__main__":
             if len(text) > JUDGEMENT_CHARACTER_LOWER_LIMIT and len(text) < JUDGEMENT_CHARACTER_UPPER_LIMIT:
                 
                 with open(file_path, "w", encoding="utf-8") as f:
-                    f.write(text)
                 
                 file_count += 1
                 
@@ -272,7 +329,4 @@ if __name__ == "__main__":
     shuffle(JUDGEMENTS_FOLDER)
     
     zipdir(JUDGEMENTS_FOLDER, os.path.join(DATA_FOLDER, "judgements.zip"))
-
-
-
 
