@@ -21,6 +21,6 @@ The following documents are attached as part of this milestone:
 - Delete all the files/folders in the [src](https://github.ubc.ca/us45/COLX_523_group3/tree/master/src) folder excluding [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py) and [url_dict.json](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/data/url_dict.json)
 - Execute [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py). It will fetch all the urls from the court website, save the judgements to txt files, shuffle and zip them to judgements.zip
 
-Note: The [url_dict.json](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/data/url_dict.json) contains all the urls for documents which will be saved locally. It is recommended to fetch is again only when search parameters are updated, otherwise it can be re-used to save time and directly start with saving of the documents.
+Note: The [url_dict.json](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/data/url_dict.json) contains all the urls for documents which will be saved locally. It is recommended to fetch this again only when search parameters are updated, otherwise it can be re-used to save time and directly start with saving of the documents.
 
 Note: The number of files to be downloaded, restrictions (required document length range) and search criterion can be changed within [scraper.py](https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/scraper.py)
