@@ -1,13 +1,13 @@
-#COLX_523_group3 Milestone 1
+# COLX_523_group3 Milestone 2
 
-This is the readme file for Milestone 2 of COLX 523 Project.
+_This is the readme file for Milestone 2 of COLX 523 Project._
 
 The following documents are attached as part of this milestone:
 
-annotation_guidelines.md - This file communicates what rules we would be following for the annotation of our corpus 
+[__annotation_guidelines.md__](https://github.ubc.ca/us45/COLX_523_group3/blob/master/milestone_2/annotation_guidelines.md) - This file communicates what rules we would be following for the annotation of our corpus. It consists of the entities we identified in the documents and some general annotation rules for each of those entities.
 
-annotation_plan.md - This file contains our annotation plain with details about the annotation tool, timeline, evaluation and process.
+[__annotation_plan.md__](https://github.ubc.ca/us45/COLX_523_group3/blob/master/milestone_2/annotation_plan.md) - This file includes our annotation plan with details about the annotation tool, timeline, evaluation and process.
 
-corpus_analysis.md - This is a document that consists of various analysis done on our corpus in comparison to other available NLTK corpus
+[__corpus_analysis.md__](https://github.ubc.ca/us45/COLX_523_group3/blob/master/milestone_2/corpus_analysis.md) - This file consists of an analysis done on our corpus in comparison to other available NLTK corpus. It also includes some basic stats about our corpus files such as token count, most common words, average word count and type-to-token ratio.
 
-corpus_analysis.ipynb - This is the code used to generate the details mentioned in corpus_analysis.md
+[__corpus_analysis.ipynb__](https://github.ubc.ca/us45/COLX_523_group3/blob/master/milestone_2/corpus_analysis.ipynb) - This is the notebook file which was used to generate the analysis done in corpus_analysis.md.
