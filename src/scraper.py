@@ -2,7 +2,6 @@ import os
 import re
 import time
 import json
-import codecs
 import glob
 import shutil
 import random
