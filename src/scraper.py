@@ -27,7 +27,7 @@ JUDGEMENTS_FOLDER = os.path.join(DATA_FOLDER, "judgements")
 # path the the json file where the urls of all cases are saved
 URL_DICT_PATH = os.path.join(DATA_FOLDER, "url_dict.json")
 
-MAX_FILES = 400
+MAX_FILES = 100
 JUDGEMENT_CHARACTER_LOWER_LIMIT = 5000
 JUDGEMENT_CHARACTER_UPPER_LIMIT = 20000
 
@@ -287,8 +287,11 @@ if __name__ == "__main__":
 
     with open(URL_DICT_PATH) as f:
         url_dict = json.load(f)
-    
-    file_count = 0
+
+    try:
+        file_count = len(glob.glob(JUDGEMENTS_FOLDER + "/*"))
+    except:
+        file_count = 0
     
     if not os.path.exists(JUDGEMENTS_FOLDER):
         os.makedirs(JUDGEMENTS_FOLDER)
@@ -297,7 +300,7 @@ if __name__ == "__main__":
         file_name = slugify(case_name) + ".txt"
         file_path = os.path.join(JUDGEMENTS_FOLDER, file_name)
 
-        if file_count == MAX_FILES:
+        if file_count >= MAX_FILES:
             log(f"\nMaximum limit of {MAX_FILES} documents reached. Stopping...")
             break
 
@@ -313,6 +316,7 @@ if __name__ == "__main__":
             if len(text) > JUDGEMENT_CHARACTER_LOWER_LIMIT and len(text) < JUDGEMENT_CHARACTER_UPPER_LIMIT:
                 
                 with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(text)
                 
                 file_count += 1
                 
