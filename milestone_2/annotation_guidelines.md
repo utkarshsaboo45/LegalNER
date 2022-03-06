@@ -83,7 +83,7 @@ An entity consists of one or more words. Any named entity must contain at least 
 
 Each of the court judgment documents was scraped and stored as .txt file. It was cleaned from html tags and prepared for annotation during scraping, i.e. files only contain plain text.
 
-The code that produces the data can be found in [data](https://github.ubc.ca/us45/COLX_523_group3/tree/utkarsh/src/data) 
+The code that produces the data can be found in [data](https://github.ubc.ca/us45/COLX_523_group3/tree/master/src/data) 
 
 
 
