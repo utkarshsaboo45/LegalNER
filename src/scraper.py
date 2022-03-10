@@ -27,7 +27,7 @@ JUDGEMENTS_FOLDER = os.path.join(DATA_FOLDER, "judgements")
 # path the the json file where the urls of all cases are saved
 URL_DICT_PATH = os.path.join(DATA_FOLDER, "url_dict.json")
 
-MAX_FILES = 400
+MAX_FILES = 100
 JUDGEMENT_CHARACTER_LOWER_LIMIT = 5000
 JUDGEMENT_CHARACTER_UPPER_LIMIT = 20000
 
@@ -44,7 +44,7 @@ def log(message, echo=True):
     """
     if echo:
         print(message)
-    with open("logs.txt", "a") as log_file:
+    with open("logs.txt", "a", encoding="utf-8") as log_file:
         log_file.write(message + "\n")
 
 
@@ -114,7 +114,7 @@ def create_url_dict(
     if not os.path.exists(DATA_FOLDER):
         os.makedirs(DATA_FOLDER)
     
-    with open(URL_DICT_PATH, "w") as f:
+    with open(URL_DICT_PATH, "w", encoding="utf-8") as f:
         json.dump(url_dict, f)
     
     log("Urls saved in data/url_dict.json.")
@@ -221,37 +221,102 @@ def zipdir(path, filename):
 
     ziph.close()
     log("Judgements zipped.")
+    
 
+def merge(path_rasa, path_ls):
+    """
+    A helper method to merge output dictionaries from RASA and Label-Studio
+
+    Parameters
+    ----------
+    path_rasa : str
+        path to the RASA JSON outut file.
+    path_ls : str
+        path to the Label-Studio output file.
+
+    Returns
+    -------
+    export_dict_list : list
+        A merged list of dictionaries with all document texts and entities from
+        the RASA and Label-studio JSON files.
+
+    """
+    with open(path_rasa, encoding="utf-8-sig") as f:
+        dict_rasa = json.load(f)
+    with open(path_ls, encoding="utf-8") as f:
+        dict_ls = json.load(f)
+
+    export_dict_list = list()
+
+    for doc in dict_rasa["rasa_nlu_data"]["common_examples"]:
+        entities = list()
+        for entity in doc["entities"]:
+            entities.append({
+                "start": entity["start"],
+                "end": entity["end"],
+                "value": entity["value"],
+                "entity": entity["entity"],
+            })
+
+        export_dict_list.append({
+            "text": doc["text"].encode('unicode-escape').replace(b'\\\\', b'\\').decode('unicode-escape'),
+            "entities": entities
+        })
+
+    for doc in dict_ls:
+        entities = list()
+        for entity in doc["label"]:
+            entities.append({
+                "start": entity["start"],
+                "end": entity["end"],
+                "value": entity["text"],
+                "entity": entity["labels"][0],
+            })
+
+        export_dict_list.append({
+            "text": doc["text"].encode('unicode-escape').decode('unicode-escape'),
+            "entities": entities
+        })
+
+    return export_dict_list    
+    
 
 if __name__ == "__main__":
     if not os.path.exists(URL_DICT_PATH):
-        create_url_dict(
-            year_search_params=list(range(1990, 2023))
-        )
+        create_url_dict()
 
     with open(URL_DICT_PATH) as f:
         url_dict = json.load(f)
-    
-    file_count = 0
+
+    try:
+        file_count = len(glob.glob(JUDGEMENTS_FOLDER + "/*"))
+    except:
+        file_count = 0
     
     if not os.path.exists(JUDGEMENTS_FOLDER):
         os.makedirs(JUDGEMENTS_FOLDER)
     
     for i, (case_name, case_url) in enumerate(url_dict.items()):
-        if file_count == MAX_FILES:
+        file_name = slugify(case_name) + ".txt"
+        file_path = os.path.join(JUDGEMENTS_FOLDER, file_name)
+
+        if file_count >= MAX_FILES:
             log(f"\nMaximum limit of {MAX_FILES} documents reached. Stopping...")
             break
-        
-        log(f"Fetching file {i + 1} out of {len(url_dict.items())} ...")
+
+        if os.path.exists(file_path):
+            log(f"File {file_name} already exists, skipping...")
+            continue
+
+        log(f"Fetching file {i + 1} out of {len(url_dict.items())}...")
         page_soup = BeautifulSoup(urlopen(case_url), "html.parser")
         try:
-            text = get_text(page_soup)
+            text = re.sub("[^\S\r\n]+", " ", get_text(page_soup))
         
             if len(text) > JUDGEMENT_CHARACTER_LOWER_LIMIT and len(text) < JUDGEMENT_CHARACTER_UPPER_LIMIT:
-                file_name = slugify(case_name) + ".txt"
                 
-                with open(os.path.join(JUDGEMENTS_FOLDER, file_name), "w") as f:
-                    f.write(re.sub("[^\S\r\n]+", " ", text))
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(text)
                 
                 file_count += 1
                 
@@ -263,8 +328,9 @@ if __name__ == "__main__":
             else:
                 log(f"Skipping document with size {len(text)}...")
         except:
-            log(f"Failed extracting text from document {i}")
+            log(f"Failed extracting text from document {i + 1}")
     
     shuffle(JUDGEMENTS_FOLDER)
     
     zipdir(JUDGEMENTS_FOLDER, os.path.join(DATA_FOLDER, "judgements.zip"))
+
