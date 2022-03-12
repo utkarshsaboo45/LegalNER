@@ -10,7 +10,7 @@ There are four sub folders in the `annotation` folder, one for each team member 
 
 Here are the links to the annotations done and reviewed by each team member :
 
-1) Badr -
+1) Badr - https://github.ubc.ca/us45/COLX_523_group3/tree/master/src/data/annotations/badr
 
 2) Oksana - https://github.ubc.ca/us45/COLX_523_group3/tree/master/src/data/annotations/oksana
 
