@@ -11,7 +11,7 @@ K score : 0.9371439741077994
 Alpha score : 0.9360954383660536
 ```
 
-As a bonus, we also calculated precision, recall and f1 measure for our annotations, the details of which can be found [here](https://github.ubc.ca/us45/COLX_523_group3/blob/utkarsh/milestone_3/Interannotator-agreement.pdf). We obtained the following results:
+As a bonus, we also calculated precision, recall and f1 measure for our annotations, an example of which can be found [here](https://github.ubc.ca/us45/COLX_523_group3/blob/master/milestone_3/Interannotator-agreement.pdf). We obtained the following results:
 
 ```
 Total number of annotated entities: 5890
