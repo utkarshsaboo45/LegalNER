@@ -14,6 +14,7 @@ from collections import defaultdict
 TEXT_MATCH_LENGTH = 100
 TAGGERS_THRESHOLD = 3
 REVIEWERS_THRESHOLD = 2
+FINAL_JSON_PATH = "data/annotations.json"
 
 
 def extract_relevant_fields(doc):
@@ -227,6 +228,8 @@ if __name__ == "__main__":
     for folder in glob.glob("data/annotations/*"):
         paths.extend(glob.glob(folder + "/*"))
 
+    final_json_paths = []
+
     total_annotated_entities, total_correctly_annotated_entities, total_missed_entities = 0, 0, 0
 
     for bdr_path, oks_path, sne_path, utk_path in zip(paths[0:4], paths[4:8], paths[8:12], paths[12:16]):
@@ -234,6 +237,8 @@ if __name__ == "__main__":
         taggers = list()
 
         for ann_path in [bdr_path, oks_path, sne_path, utk_path]:
+            if "_" not in ann_path:
+                final_json_paths.append(ann_path)
 
             with open(ann_path, encoding="utf-8") as f:
                 docs = json.load(f)
@@ -265,4 +270,13 @@ if __name__ == "__main__":
     print(f"Our final agreement precision: {round(precision, 3)}")
     print(f"Our final agreement recall: {round(recall, 3)}")
     print(f"Our final agreement f1-score: {round(f1, 3)}")
+
+    final_json = []
+
+    for json_path in final_json_paths:
+        with open(json_path, encoding="utf-8") as f:
+            final_json.extend(json.load(f))
+
+    with open(FINAL_JSON_PATH, "w+", encoding="utf-8") as f:
+        json.dump(final_json, f, indent=4)
         
