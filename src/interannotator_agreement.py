@@ -43,7 +43,7 @@ def extract_relevant_fields(doc):
                 "label": entity["value"]["labels"][0]
             })
         except:
-            print(entity["value"])
+            pass
 
     return {
         "entities": entities,
@@ -97,7 +97,7 @@ def get_aligned_docs_list(docs_dict, annotator):
 
     """
     assert len(docs_dict) > 1
-    print(annotator)
+
     for _, docs in docs_dict.items():
         for doc_i, doc in enumerate(docs):
             docs[doc_i] = extract_relevant_fields(doc)
@@ -184,7 +184,7 @@ def calculate_inter_annotator_score(aligned_docs_list, annotator):
         for reviewers in spans_dict.values():
             if annotator in reviewers and len(reviewers) >= TAGGERS_THRESHOLD:
                 total_correctly_annotated += 1
-            if annotator not in reviewers and len(reviewers) >= REVIEWERS_THRESHOLD:
+            if annotator not in reviewers and len(reviewers) <= REVIEWERS_THRESHOLD:
                 total_missed += 1
 
     return total_annotated, total_correctly_annotated, total_missed
@@ -229,11 +229,11 @@ if __name__ == "__main__":
 
     total_annotated_entities, total_correctly_annotated_entities, total_missed_entities = 0, 0, 0
 
-    for oks_path, sne_path, utk_path in zip(paths[1:5], paths[5:9], paths[9:13]):
+    for bdr_path, oks_path, sne_path, utk_path in zip(paths[0:4], paths[4:8], paths[8:12], paths[12:16]):
         docs_dict = dict()
         taggers = list()
 
-        for ann_path in [oks_path, sne_path, utk_path]:
+        for ann_path in [bdr_path, oks_path, sne_path, utk_path]:
 
             with open(ann_path, encoding="utf-8") as f:
                 docs = json.load(f)
