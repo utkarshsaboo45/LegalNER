@@ -20,7 +20,7 @@ Here are the links to the annotations done and reviewed by each team member :
 
 ### 1.2. Link to Final Annotation
 
-The link to the final annotation file is here - 
+The link to the final annotation file is here - https://github.ubc.ca/us45/COLX_523_group3/blob/master/src/data/annotations.json
 
 ## 2. Code
 
