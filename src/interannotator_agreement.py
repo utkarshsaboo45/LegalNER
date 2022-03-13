@@ -12,8 +12,8 @@ from collections import defaultdict
 
 
 TEXT_MATCH_LENGTH = 100
-TAGGERS_THRESHOLD = 2
-REVIEWERS_THRESHOLD = 1
+TAGGERS_THRESHOLD = 3
+REVIEWERS_THRESHOLD = 2
 
 
 def extract_relevant_fields(doc):
@@ -34,13 +34,16 @@ def extract_relevant_fields(doc):
     """
     entities = []
     for entity in doc["annotations"][0]["result"]:
-        entities.append({
-            "start": entity["value"]["start"],
-            "end": entity["value"]["end"],
-            "span": (entity["value"]["start"], entity["value"]["end"]),
-            "text": entity["value"]["text"],
-            "label": entity["value"]["labels"][0]
-        })
+        try:
+            entities.append({
+                "start": entity["value"]["start"],
+                "end": entity["value"]["end"],
+                "span": (entity["value"]["start"], entity["value"]["end"]),
+                "text": entity["value"]["text"],
+                "label": entity["value"]["labels"][0]
+            })
+        except:
+            print(entity["value"])
 
     return {
         "entities": entities,
@@ -94,7 +97,7 @@ def get_aligned_docs_list(docs_dict, annotator):
 
     """
     assert len(docs_dict) > 1
-
+    print(annotator)
     for _, docs in docs_dict.items():
         for doc_i, doc in enumerate(docs):
             docs[doc_i] = extract_relevant_fields(doc)
@@ -122,9 +125,9 @@ def get_aligned_docs_list(docs_dict, annotator):
     return aligned_docs_list
 
 
-def get_span_list(entities):
+def get_span_label_list(entities):
     """
-    Get a list of all the spans from a 
+    Get a list of tuples of all the spans and labels from a list of entities
 
     Parameters
     ----------
@@ -134,10 +137,10 @@ def get_span_list(entities):
     Returns
     -------
     list
-        A list of spans for all the entities.
+        A list of tuples of spans and labels for all the entities.
 
     """
-    return [entity["span"] for entity in entities]
+    return [(entity["span"], entity["label"]) for entity in entities]
 
 
 def calculate_inter_annotator_score(aligned_docs_list, annotator):
@@ -170,13 +173,13 @@ def calculate_inter_annotator_score(aligned_docs_list, annotator):
         
         spans_dict = defaultdict(set)
 
-        for span in get_span_list(aligned_doc["ref_entities"]):
+        for span in get_span_label_list(aligned_doc["ref_entities"]):
             spans_dict[span].add(annotator)
 
         total_annotated += len(spans_dict)
 
         for reviewer, reviewed_entities in aligned_doc["reviewed_entities"].items():
-            for span in get_span_list(reviewed_entities):
+            for span in get_span_label_list(reviewed_entities):
                 spans_dict[span].add(reviewer)
         for reviewers in spans_dict.values():
             if annotator in reviewers and len(reviewers) >= TAGGERS_THRESHOLD:
@@ -226,7 +229,7 @@ if __name__ == "__main__":
 
     total_annotated_entities, total_correctly_annotated_entities, total_missed_entities = 0, 0, 0
 
-    for oks_path, sne_path, utk_path in zip(paths[1:4], paths[4:7], paths[7:10]):
+    for oks_path, sne_path, utk_path in zip(paths[1:5], paths[5:9], paths[9:13]):
         docs_dict = dict()
         taggers = list()
 
