@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <script language="javascript" type="text/javascript" src="frontend.js"> </script>
+    <link rel="stylesheet" type="text/css" href="frontend.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript">
+    $(function () {
+            $('#submit-button').click(function () {
+                $('.content_hide').show();
+            });
+        });
+        function check_keyword() {
+
+            var key = document.getElementById("search");
+            var key_disp = document.getElementById("disp_search");
+            if (key.value.length == 0) {
+                alert("Enter keyword to search!");
+                return false;
+            }
+            else {
+
+                update_page()
+            }
+
+        }
+    </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+    <title>Court Judgements Named Entity Annotation</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <br>
+            <h1>Named Entity Annotated JUDGE Corpus</h1>
+            <br>
+            <div class="d-flex justify-content-center">
+                <a onClick="window.location.reload()" style="cursor: pointer;">
+                    <buttom type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#myModalll">
+                        Main
+                    </buttom>
+                </a>
+                <form action="/about/" id="about-form">
+                    <buttom type="button" onclick="update_about_form();" class="btn btn-outline-info">About
+                    </buttom>
+                </form>
+                <form action="/usage/" id="usage-form">
+                    <buttom type="button" onclick="update_usage_form();" class="btn btn-outline-info">Usage
+                    </buttom>
+                </form>    
+            </div>
+        </div>
+        <div class="container" id="container">
+            <form action="/corpus/" id="form">
+                <div>
+                    Enter entity keyword: <input type="text" name="keyword" id="search"
+                        placeholder="keyword"><br><br>
+                    <!-- <div class="event_button"> -->
+                    Select entity type: <select name="entity">
+                        <option name="entity" value="judge" checked> Judge
+                        <option name="entity" value="appellant" checked> Appellant
+                        <option name="entity" value="respondent" checked> Respondent
+                        <option name="entity" value="couns_appel" checked> Appellant Counsel
+                        <option name="entity" value="couns_resp" checked> Respondent Counsel
+                        <option name="entity" value="citation" checked> Citation
+                        <option name="entity" value="date_judgement" checked> Date of judgement
+                        <option name="entity" value="date_hearing" checked>  Date of hearing
+                    </select><br><br>
+                </div>
+                <br>
+                <div class="submit-button">
+                    <button type="button" onclick="check_keyword();" class="btn btn-info" id="submit-button"> Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+        </div>
+    <div class="container" id="maintext">
+    </div>
+
+</body>
+</html>
