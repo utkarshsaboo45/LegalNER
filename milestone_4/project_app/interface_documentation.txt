@@ -1,0 +1,30 @@
+This file provides technical documentation of the project's frontend.
+
+1. backend.py
+
+The backend.py implements the interface's functionality, using FastAPI that responds to HTTP "GET" requests from a browser. The code is broken down into functions with proper documentation.
+ 
+2. frontend.html 
+The frontend.html contains three forms: form, about-form, and usage-form. 
+<form action="/about/" id="about-form">  with  onclick="update_about_form()"  and  <form action="/usage/" id="usage-form">  with onclick="update_usage_form()"  invoke appropriate javascript functions. 
+When the submit button was pressed, class="submit-button" first checks if the keyword was typed, and if it was typed  - uses update_page(), else - asks to "Enter a keyword to search!".
+
+3. frontend.js
+The frontend.js is a javascript file that communicates between the frontend.html and the backend.py. It contains the following functions:
+- insert_result - inserts results to the <maintext> section of frontend.html 
+- insert_result_container - inserts results to the <container> section of frontend.html 
+- update_page  - updates the Main page of the frontend interface
+- update_about_form - updates the About page of the frontend interface
+- update_usage_form - updates the Usage page of the frontend interface
+
+4. frontend.css
+
+The frontend.css
+
+5. about.html 
+
+The about.html contains an explanation of how to use the interface.
+
+6. usage.html
+
+The usage.html introduces the project, contributors, and the mentor.
