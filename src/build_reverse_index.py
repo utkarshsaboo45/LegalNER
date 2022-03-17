@@ -7,6 +7,7 @@ Created on Thu Mar 17 01:15:01 2022
 
 import re
 import json
+from dateutil import parser
 from collections import defaultdict
 
 
@@ -60,7 +61,19 @@ def build_reverse_index(documents):
 
     for doc in documents:
         for entity in doc["entities"]:
-            entity_docid_dict[entity["label"]][normalize_entity_text(entity["text"])].add(doc["doc_id"])
+            if entity["label"] in ["DATE_HEARING", "DATE_JUDGEMENT"]:
+                try:
+                    date = str(parser.parse(entity["text"]))[:10]
+                    entity_docid_dict[entity["label"]][date].add(doc["doc_id"])
+                except:
+                    entity_docid_dict[entity["label"]][entity["text"]].add(doc["doc_id"])
+            else:
+                entity_docid_dict[entity["label"]][normalize_entity_text(entity["text"])].add(doc["doc_id"])
+
+    # Converting sets to lists to make it serializable
+    for _, entity_dict in entity_docid_dict.items():
+        for entity in entity_dict:
+            entity_dict[entity] = list(entity_dict[entity])
 
     return entity_docid_dict
 
@@ -72,4 +85,4 @@ if __name__ == "__main__":
     entity_docid_dict = build_reverse_index(documents)
 
     with open(REVERSE_INDEX_PATH, "w", encoding="utf-8") as f:
-        json.dumps(entity_docid_dict, f, indent=4)
+        json.dump(entity_docid_dict, f, indent=4)
