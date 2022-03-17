@@ -60,36 +60,30 @@ def display_usage():
 
 @app.get("/corpus/")
 def display_corpus(keyword, entity):
-    if entity == "judge":
-        entity_name = "PERS_JUDGE"
+    if entity == "PERS_JUDGE":
         return HTMLResponse(
-            put_in_table(find_matching_documents(keyword, entity, entity_name))
+            put_in_table(find_matching_documents(keyword, entity))
         )
-    if entity == "appellant":
-        entity_name = "PERS_APPELLANT"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "respondent":
-        entity_name = "PERS_RESPONDENT"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "couns_appel":
-        entity_name = "PERS_COUNS_APPEL"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "couns_resp":
-        entity_name = "PERS_COUNS_RESP"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "citation":
-        entity_name = "CITATION"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "date_judgement":
-        entity_name = "DATE_JUDGEMENT"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
-    if entity == "date_hearing":
-        entity_name = "DATE_HEARING"
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity_name)))
+    if entity == "PERS_APPELLANT":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "PERS_RESPONDENT":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "PERS_COUNS_APPEL":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "PERS_COUNS_RESP":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "CITATION":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "DATE_JUDGEMENT":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == "DATE_HEARING":
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    if entity == 'COURT_NAME':
+        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
 
 
 # Finding data match
-def find_matching_documents(keyword, entity, entity_name):
+def find_matching_documents(keyword, entity_name):
     """Display the dataframe where the keyword appears on the frontend html page.
     keyword: a keyword to search documents. It can be a
     entity: a mode of search. Depending on the mode, this function calls different functions.
