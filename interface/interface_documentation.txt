@@ -6,7 +6,9 @@ The backend.py implements the interface's functionality, using FastAPI that resp
  
 2. frontend.html 
 The frontend.html contains three forms: form, about-form, and usage-form. 
-<form action="/about/" id="about-form">  with  onclick="update_about_form()"  and  <form action="/usage/" id="usage-form">  with onclick="update_usage_form()"  invoke appropriate javascript functions. 
+
+<form action="/about/" id="about-form">  with  onclick="update_about_form()" and <form action="/usage/" id="usage-form"> with onclick="update_usage_form()" invoke appropriate javascript functions. 
+
 When the submit button was pressed, class="submit-button" first checks if the keyword was typed, and if it was typed  - uses update_page(), else - asks to "Enter a keyword to search!".
 
 3. frontend.js
