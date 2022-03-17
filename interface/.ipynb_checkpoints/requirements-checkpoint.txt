@@ -1,0 +1,7 @@
+uvicorn[standard]
+fastapi
+aiofiles
+nltk
+numpy
+pandas
+
