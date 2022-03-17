@@ -37,8 +37,8 @@ def extract_relevant_fields(doc):
     for entity in doc["annotations"][0]["result"]:
         try:
             entities.append({
-                "start": entity["value"]["start"],
-                "end": entity["value"]["end"],
+                # "start": entity["value"]["start"],
+                # "end": entity["value"]["end"],
                 "span": (entity["value"]["start"], entity["value"]["end"]),
                 "text": entity["value"]["text"],
                 "label": entity["value"]["labels"][0]
@@ -47,6 +47,7 @@ def extract_relevant_fields(doc):
             pass
 
     return {
+        "doc_id": str(uuid.uuid1()),
         "entities": entities,
         "text": doc["data"]["text"]
     }
@@ -271,12 +272,12 @@ if __name__ == "__main__":
     print(f"Our final agreement recall: {round(recall, 3)}")
     print(f"Our final agreement f1-score: {round(f1, 3)}")
 
-    final_json = []
+    # final_json = []
 
-    for json_path in final_json_paths:
-        with open(json_path, encoding="utf-8") as f:
-            final_json.extend(json.load(f))
+    # for json_path in final_json_paths:
+    #     with open(json_path, encoding="utf-8") as f:
+    #         final_json.extend(json.load(f))
 
-    with open(FINAL_JSON_PATH, "w+", encoding="utf-8") as f:
-        json.dump(final_json, f, indent=4)
+    # with open(FINAL_JSON_PATH, "w+", encoding="utf-8") as f:
+    #     json.dump(final_json, f, indent=4)
         

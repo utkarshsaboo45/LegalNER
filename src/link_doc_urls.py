@@ -96,6 +96,7 @@ def link_url_to_doc(docs, urls, dict_un_slugify_urls, dict_doc_content_to_name):
             doc_name = dict_doc_content_to_name[doc_few_chars]
             doc_url = urls[dict_un_slugify_urls[doc_name]]
             doc["url"] = doc_url
+            doc["doc_id"]
         except:
             print("Failed to extract from", doc_few_chars[:30])
         cleaned_docs_with_url.append(doc)
