@@ -1,26 +1,30 @@
-from fastapi import FastAPI
-from fastapi.responses import FileResponse, HTMLResponse
-from collections import defaultdict
-import spacy
-import uvicorn
 import numpy as np
-import random
-import json
 import pandas as pd
 import os
 import nltk
+import json
+import random
+
+from collections import defaultdict
+
+from fastapi import FastAPI
+from fastapi.responses import FileResponse, HTMLResponse
+
+import spacy
+import uvicorn
+
 
 nltk.download("brown")
 nltk.download("universal_tagset")
+
 from nltk.corpus import brown
-from collections import defaultdict
 
 
 app = FastAPI()
+DOC_TEXT_CHARACTER_THRESHOLD = 100
 
 
-# define functions
-def open_file_return_corpus(path):
+def read_corpus(path):
     """Given a path, open a json file and return a list of dictionaries."""
     f = open(path, encoding="utf-8")
     corpus = json.load(f)
@@ -28,12 +32,9 @@ def open_file_return_corpus(path):
     return corpus
 
 
-# load corpora
-paths = [
-    "./final_annotations.json",
-]
-
-corpus = open_file_return_corpus(paths[0])
+# Load corpora
+path = "./final_annotations.json"
+corpus = read_corpus(path)
 
 
 @app.get("/")
@@ -60,6 +61,9 @@ def display_usage():
 
 @app.get("/corpus/")
 def display_corpus(keyword, entity):
+    
+    ## Why are we doing this?
+    """
     if entity == "PERS_JUDGE":
         return HTMLResponse(
             put_in_table(find_matching_documents(keyword, entity))
@@ -80,9 +84,12 @@ def display_corpus(keyword, entity):
         return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
     if entity == 'COURT_NAME':
         return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    """
+    ## I think we can directly do this (?):
+    return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
 
 
-# Finding data match
+# Finding Matching Documents on the givem Keyword and Entity/Tag
 def find_matching_documents(keyword, entity_name):
     """Display the dataframe where the keyword appears on the frontend html page.
     keyword: a keyword to search documents. It can be a
@@ -90,25 +97,31 @@ def find_matching_documents(keyword, entity_name):
 
     """
     matching_documents = defaultdict(dict)
-    # find a paragraph in a corpus
+
+    # Extract paragraph from a matching document
     count = 0
+
     for i, doc in enumerate(corpus):
         for entity in doc["entities"]:
             if entity["label"] == entity_name:
                 if keyword.lower() in entity["text"].lower():
                     start, end = entity["span"]
-                    if start <= 200:
+                    if start <= DOC_TEXT_CHARACTER_THRESHOLD:
                         matching_documents[count]["doc_match"] = doc["text"][
-                            : end + 200
+                            : end + DOC_TEXT_CHARACTER_THRESHOLD
                         ]
                     else:
                         matching_documents[count]["doc_match"] = (
-                            "..." + doc["text"][start - 200 : end + 200] + "..."
+                            f"""
+                                ...{doc['text'][start - DOC_TEXT_CHARACTER_THRESHOLD: start]}
+                                <mark style="color: black; background-color:pink">{doc['text'][start: end]}</mark>
+                                {doc['text'][end: end + DOC_TEXT_CHARACTER_THRESHOLD]}...
+                            """
                         )
                     try:
-                        matching_documents[count]["full_doc"] = doc['url']
+                        matching_documents[count]["doc_link"] = doc["url"]
                     except KeyError:
-                        matching_documents[count]["full_doc"] = "None"
+                        matching_documents[count]["doc_link"] = "None"
 
                     break
         count += 1
@@ -116,28 +129,40 @@ def find_matching_documents(keyword, entity_name):
 
 
 def create_row(dictionary):
-    S = []
     i = 0
-    output_str = ""
-    for k in dictionary.keys():
-        values = dictionary[k].values()
-        S = []
+    output_html = ""
+
+    for columns in dictionary.values():
         i += 1
-        S.append("<tr>")
-        S.append('<th scope="row">' + str(i) + "</th>")
-        for value in values:
-            S.append("<td>" + value + "</td>")
-        S.append("</tr>")
-        output_str += "".join(S)
-    return output_str
+        output_html += "<tr>"
+        output_html += f"<th scope='row'>{str(i)}</th>"
+        for key, value in columns.items():
+            if key == "doc_link":
+                output_html += f"<td><a href={value}>View Document</a></td>"
+            else:
+                output_html += f"<td>{value}</td>"
+        output_html += "</tr>"
+    return output_html
 
 
 def put_in_table(doc_dict):
     return (
-        '<table class="table table-hover table-striped"><thead><tr><th scope="col">#</th><th scope="col">Matched Document</th><th scope="col">Link to the Document</th></tr></thead><tbody>'
-        + create_row(doc_dict)
-        + "</tbody></table>"
+        f"""
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Doc #</th>
+                        <th scope="col">Matched Documents</th>
+                        <th scope="col">Link to the Document</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {create_row(doc_dict)}
+                </tbody>
+            </table>
+        """
     )
+
 
 
 if __name__ == "__main__":
