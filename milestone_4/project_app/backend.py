@@ -1,27 +1,16 @@
-import numpy as np
-import pandas as pd
-import os
-import nltk
 import json
-import random
-
 from collections import defaultdict
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, HTMLResponse
 
-import spacy
 import uvicorn
-
-
-nltk.download("brown")
-nltk.download("universal_tagset")
-
-from nltk.corpus import brown
 
 
 app = FastAPI()
 DOC_TEXT_CHARACTER_THRESHOLD = 100
+MARK_COLOR = "red"
+MARK_BACKGROUND_COLOR = "pink"
 
 
 def read_corpus(path):
@@ -61,33 +50,30 @@ def display_usage():
 
 @app.get("/corpus/")
 def display_corpus(keyword, entity):
-    
-    ## Why are we doing this?
-    """
-    if entity == "PERS_JUDGE":
-        return HTMLResponse(
-            put_in_table(find_matching_documents(keyword, entity))
-        )
-    if entity == "PERS_APPELLANT":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "PERS_RESPONDENT":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "PERS_COUNS_APPEL":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "PERS_COUNS_RESP":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "CITATION":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "DATE_JUDGEMENT":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == "DATE_HEARING":
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    if entity == 'COURT_NAME':
-        return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
-    """
-    ## I think we can directly do this (?):
     return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
 
+
+def get_document_text(text, start, end, doc_text_char_threshold):
+    before_start = start - doc_text_char_threshold
+    before_end = start
+    after_start = end
+    after_end = end + doc_text_char_threshold
+    dots_before = "..."
+    dots_after = "..."
+
+    if start <= doc_text_char_threshold:
+        before_start = 0
+        dots_before = ""
+    if end >= len(text) - doc_text_char_threshold:
+        after_end = len(text)
+        dots_after = ""
+        
+    return f"""
+        {dots_before}{text[before_start: before_end]}
+        <mark style="color: {MARK_COLOR}; background-color:{MARK_BACKGROUND_COLOR}">{text[start: end]}</mark>
+        {text[after_start: after_end]}{dots_after}
+    """
+    
 
 # Finding Matching Documents on the givem Keyword and Entity/Tag
 def find_matching_documents(keyword, entity_name):
@@ -106,18 +92,9 @@ def find_matching_documents(keyword, entity_name):
             if entity["label"] == entity_name:
                 if keyword.lower() in entity["text"].lower():
                     start, end = entity["span"]
-                    if start <= DOC_TEXT_CHARACTER_THRESHOLD:
-                        matching_documents[count]["doc_match"] = doc["text"][
-                            : end + DOC_TEXT_CHARACTER_THRESHOLD
-                        ]
-                    else:
-                        matching_documents[count]["doc_match"] = (
-                            f"""
-                                ...{doc['text'][start - DOC_TEXT_CHARACTER_THRESHOLD: start]}
-                                <mark style="color: black; background-color:pink">{doc['text'][start: end]}</mark>
-                                {doc['text'][end: end + DOC_TEXT_CHARACTER_THRESHOLD]}...
-                            """
-                        )
+                    matching_documents[count]["doc_match"] = get_document_text(
+                        doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
+                    )
                     try:
                         matching_documents[count]["doc_link"] = doc["url"]
                     except KeyError:
@@ -151,9 +128,9 @@ def put_in_table(doc_dict):
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Doc #</th>
+                        <th scope="col">#</th>
                         <th scope="col">Matched Documents</th>
-                        <th scope="col">Link to the Document</th>
+                        <th scope="col">Judgement Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -162,7 +139,6 @@ def put_in_table(doc_dict):
             </table>
         """
     )
-
 
 
 if __name__ == "__main__":
