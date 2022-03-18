@@ -10,8 +10,19 @@ import uvicorn
 
 app = FastAPI()
 DOC_TEXT_CHARACTER_THRESHOLD = 100
-MARK_COLOR = "red"
-MARK_BACKGROUND_COLOR = "pink"
+MARK_COLOR = "black"
+entity_color_dict = {
+    "COURT_NAME": "#FFA39E",
+    "PERS_APPELLANT": "#D4380D",
+    "PERS_RESPONDENT": "#FFC069",
+    "PERS_JUDGE": "#AD8B00",
+    "PERS_COUNS_APPEL": "#D3F261",
+    "PERS_COUNS_RESP": "#389E0D",
+    "DATE_HEARING": "#5CDBD3",
+    "DATE_JUDGEMENT": "#096DD9",
+    "CITATION": "#ADC6FF",
+    "SECTION": "#9254DE"
+}
 
 
 def read_corpus(path):
@@ -85,7 +96,14 @@ def normalize_entity_text(entity_text, entity):
         return re.sub(r"[^a-zA-Z0-9]+", "", entity_text).lower()
 
 
-def get_document_text(text, start, end, doc_text_char_threshold):
+def get_color_for_entity(entity):
+    try:
+        return entity_color_dict[entity]
+    except:
+        return "#DDDDDD"
+
+
+def get_document_text(text, entity_name, start, end, doc_text_char_threshold):
     before_start = start - doc_text_char_threshold
     before_end = start
     after_start = end
@@ -102,7 +120,7 @@ def get_document_text(text, start, end, doc_text_char_threshold):
 
     return f"""
         {dots_before}{text[before_start: before_end]}
-        <mark style="color: {MARK_COLOR}; background-color:{MARK_BACKGROUND_COLOR}">{text[start: end]}</mark>
+        <mark style="color: {MARK_COLOR}; background-color:{get_color_for_entity(entity_name)}">{text[start: end]}</mark>
         {text[after_start: after_end]}{dots_after}
     """
 
@@ -133,28 +151,28 @@ def find_matching_documents(keywords, entities):
 
     """
     matching_documents = defaultdict(dict)
-    displayed_docs_list = []
+    docs_to_display_list = []
 
     for keyword, entity_name in zip(keywords, entities):
         keyword = normalize_entity_text(keyword, entity_name)
-        displayed_docs = set()
+        docs_to_display = set()
         for entity_value in reverse_index[entity_name].keys():
             if keyword in entity_value:
                 for rel_doc_id in reverse_index[entity_name][entity_value]:
-                    if rel_doc_id in displayed_docs:
+                    if rel_doc_id in docs_to_display:
                         continue
                     else:
-                        displayed_docs.add(rel_doc_id)
+                        docs_to_display.add(rel_doc_id)
 
-        displayed_docs_list.append(displayed_docs)
+        docs_to_display_list.append(docs_to_display)
 
-    merged_displayed_docs = set.intersection(*displayed_docs_list)
+    merged_docs_to_display = set.intersection(*docs_to_display_list)
     count = 0
 
     # Extract paragraph from a matching document
     for keyword, entity_name in zip(keywords, entities):
         keyword = normalize_entity_text(keyword, entity_name)
-        for rel_doc_id in merged_displayed_docs:
+        for rel_doc_id in merged_docs_to_display:
             displayed_entities = defaultdict(set_defaultdict)
             doc = corpus[rel_doc_id]
             text_match = ""
@@ -174,7 +192,7 @@ def find_matching_documents(keywords, entities):
                     start, end = entity["span"]
                     text_match += f"""
                         {hr}{get_document_text(
-                            doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
+                            doc["text"], entity_name, start, end, DOC_TEXT_CHARACTER_THRESHOLD
                         )}<br>
                     """
                     hr = """<hr class="dashed">"""
