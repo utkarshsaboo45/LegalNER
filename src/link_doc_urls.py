@@ -7,6 +7,7 @@ Created on Mon Mar 14 15:16:29 2022
 
 import re
 import json
+import uuid
 import zipfile
 from slugify import slugify
 from interannotator_agreement import extract_relevant_fields
@@ -83,12 +84,13 @@ def link_url_to_doc(docs, urls, dict_un_slugify_urls, dict_doc_content_to_name):
 
     Returns
     -------
-    cleaned_docs_with_url : list
-        A list of cleaned documents where each document is a dictionary of 
-        document text, entities and link to its corresponding url.
+    cleaned_docs_with_url : dict
+        A dictionary of cleaned documents where keys are unique document ids
+        and values are documents which is a dictionary of document text,
+        entities and link to its corresponding url.
 
     """
-    cleaned_docs_with_url = list()
+    cleaned_docs_with_url = dict()
     for doc_i, doc in enumerate(docs):
         doc = extract_relevant_fields(doc)
         doc_few_chars = re.sub("[^\S]+", "", doc["text"])[:100].lower()
@@ -96,10 +98,9 @@ def link_url_to_doc(docs, urls, dict_un_slugify_urls, dict_doc_content_to_name):
             doc_name = dict_doc_content_to_name[doc_few_chars]
             doc_url = urls[dict_un_slugify_urls[doc_name]]
             doc["url"] = doc_url
-            doc["doc_id"]
         except:
             print("Failed to extract from", doc_few_chars[:30])
-        cleaned_docs_with_url.append(doc)
+        cleaned_docs_with_url[str(uuid.uuid1())] = doc
     return cleaned_docs_with_url
     
 

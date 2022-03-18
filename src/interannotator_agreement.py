@@ -47,7 +47,7 @@ def extract_relevant_fields(doc):
             pass
 
     return {
-        "doc_id": str(uuid.uuid1()),
+        # "doc_id": str(uuid.uuid1()),
         "entities": entities,
         "text": doc["data"]["text"]
     }
