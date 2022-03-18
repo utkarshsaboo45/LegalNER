@@ -14,10 +14,12 @@ function update_page() {
 	var form = document.getElementById("form");
 	var formData = new FormData(form);
 	var searchParams = new URLSearchParams(formData);
-	var queryString = searchParams.toString();
+	keys = searchParams.getAll("keyword")
+	entities = searchParams.getAll("entity")
+	var queryString = "entity=" + entities.toString() + "&keyword=" + keys.toString()
+	// var queryString = searchParams.toString();
 	xmlHttpRqst = new XMLHttpRequest();
 	xmlHttpRqst.onload = function (e) { insert_result(xmlHttpRqst.response); }
-	// alert(queryString);
 	xmlHttpRqst.open("GET", "/corpus/?" + queryString);
 	xmlHttpRqst.send();
 

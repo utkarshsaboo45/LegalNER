@@ -8,7 +8,6 @@ from fastapi.responses import FileResponse, HTMLResponse
 
 import uvicorn
 
-
 app = FastAPI()
 DOC_TEXT_CHARACTER_THRESHOLD = 100
 MARK_COLOR = "red"
@@ -55,7 +54,9 @@ def display_usage():
 
 @app.get("/corpus/")
 def display_corpus(keyword, entity):
-    return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
+    keywords = keyword.split(",")
+    entities = entity.split(",")
+    return HTMLResponse(put_in_table(find_matching_documents(keywords, entities)))
 
 
 def normalize_entity_text(entity_text, entity):
@@ -98,7 +99,7 @@ def get_document_text(text, start, end, doc_text_char_threshold):
     if end >= len(text) - doc_text_char_threshold:
         after_end = len(text)
         dots_after = ""
-        
+
     return f"""
         {dots_before}{text[before_start: before_end]}
         <mark style="color: {MARK_COLOR}; background-color:{MARK_BACKGROUND_COLOR}">{text[start: end]}</mark>
@@ -112,9 +113,9 @@ def set_defaultdict():
 
 
 # Finding matching documents on the given keyword and entity/tag using reverse index
-def find_matching_documents(keyword, entity_name):
+def find_matching_documents(keywords, entities):
     """
-    Display a table of documents in which a particular keyword, matching a 
+    Display a table of documents in which a particular keyword, matching a
     particular entity type occurs.
 
     Parameters
@@ -132,45 +133,59 @@ def find_matching_documents(keyword, entity_name):
 
     """
     matching_documents = defaultdict(dict)
+    displayed_docs_list = []
 
-    # Extract paragraph from a matching document
+    for keyword, entity_name in zip(keywords, entities):
+        keyword = normalize_entity_text(keyword, entity_name)
+        displayed_docs = set()
+        for entity_value in reverse_index[entity_name].keys():
+            if keyword in entity_value:
+                for rel_doc_id in reverse_index[entity_name][entity_value]:
+                    if rel_doc_id in displayed_docs:
+                        continue
+                    else:
+                        displayed_docs.add(rel_doc_id)
+
+        displayed_docs_list.append(displayed_docs)
+
+    merged_displayed_docs = set.intersection(*displayed_docs_list)
     count = 0
 
-    keyword = normalize_entity_text(keyword, entity_name)
-
-    displayed_docs = set()
-
-    for entity_value in reverse_index[entity_name].keys():
-        if keyword in entity_value:
-            for rel_doc_id in reverse_index[entity_name][entity_value]:
-                if rel_doc_id in displayed_docs:
-                    continue
-                displayed_entities = defaultdict(set_defaultdict)
-                doc = corpus[rel_doc_id]
-                text_match = ""
-                hr = ""
-                for entity in doc["entities"]:
-                    if (entity["label"] == entity_name and
-                        keyword in normalize_entity_text(entity["text"], entity_name) and
-                        tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"] and
-                        normalize_entity_text(entity["text"], entity_name) not in displayed_entities[rel_doc_id]["entities"]):
-                        displayed_entities[rel_doc_id]["spans"].add(tuple(entity["span"]))
-                        displayed_entities[rel_doc_id]["entities"].add(normalize_entity_text(entity["text"], entity_name))
-                        start, end = entity["span"]
-                        text_match += f"""
-                            {hr}{get_document_text(
-                                doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
-                            )}<br>
-                        """
-                        hr = """<hr class="dashed">"""
-                displayed_docs.add(rel_doc_id)
-                matching_documents[count]["doc_match"] = text_match
-                try:
-                    matching_documents[count]["doc_link"] = doc["url"]
-                except KeyError:
-                    matching_documents[count]["doc_link"] = "None"
+    # Extract paragraph from a matching document
+    for keyword, entity_name in zip(keywords, entities):
+        keyword = normalize_entity_text(keyword, entity_name)
+        for rel_doc_id in merged_displayed_docs:
+            displayed_entities = defaultdict(set_defaultdict)
+            doc = corpus[rel_doc_id]
+            text_match = ""
+            hr = ""
+            for entity in doc["entities"]:
+                if (
+                    entity["label"] == entity_name
+                    and keyword in normalize_entity_text(entity["text"], entity_name)
+                    and tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"]
+                    and normalize_entity_text(entity["text"], entity_name)
+                    not in displayed_entities[rel_doc_id]["entities"]
+                ):
+                    displayed_entities[rel_doc_id]["spans"].add(tuple(entity["span"]))
+                    displayed_entities[rel_doc_id]["entities"].add(
+                        normalize_entity_text(entity["text"], entity_name)
+                    )
+                    start, end = entity["span"]
+                    text_match += f"""
+                        {hr}{get_document_text(
+                            doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
+                        )}<br>
+                    """
+                    hr = """<hr class="dashed">"""
+            matching_documents[count]["doc_match"] = text_match
+            try:
+                matching_documents[count]["doc_link"] = doc["url"]
+            except KeyError:
+                matching_documents[count]["doc_link"] = "None"
 
             count += 1
+
     return matching_documents
 
 
@@ -192,8 +207,7 @@ def create_rows(dictionary):
 
 
 def put_in_table(doc_dict):
-    return (
-        f"""
+    return f"""
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
@@ -207,7 +221,6 @@ def put_in_table(doc_dict):
                 </tbody>
             </table>
         """
-    )
 
 
 if __name__ == "__main__":
