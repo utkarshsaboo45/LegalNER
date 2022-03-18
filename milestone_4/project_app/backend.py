@@ -1,4 +1,6 @@
+import re
 import json
+from dateutil import parser
 from collections import defaultdict
 
 from fastapi import FastAPI
@@ -22,8 +24,11 @@ def read_corpus(path):
 
 
 # Load corpora
-path = "./final_annotations.json"
-corpus = read_corpus(path)
+annotations_path = "../../src/data/annotations_cleaned.json"
+reverse_index_path = "../../src/data/reverse_index.json"
+
+corpus = read_corpus(annotations_path)
+reverse_index = read_corpus(reverse_index_path)
 
 
 @app.get("/")
@@ -53,6 +58,32 @@ def display_corpus(keyword, entity):
     return HTMLResponse(put_in_table(find_matching_documents(keyword, entity)))
 
 
+def normalize_entity_text(entity_text, entity):
+    """
+    Normalizes a piece of text by removing everything apart from alphanumeric
+    and lowercases it.
+
+    Parameters
+    ----------
+    entity_text : str
+        Text to be normalized.
+
+    Returns
+    -------
+    str
+        Normalized text.
+
+    """
+    if entity in ["DATE_HEARING", "DATE_JUDGEMENT"]:
+        try:
+            date = str(parser.parse(entity_text))[:10]
+            return date
+        except:
+            entity_text
+    else:
+        return re.sub(r"[^a-zA-Z0-9]+", "", entity_text).lower()
+
+
 def get_document_text(text, start, end, doc_text_char_threshold):
     before_start = start - doc_text_char_threshold
     before_end = start
@@ -73,13 +104,31 @@ def get_document_text(text, start, end, doc_text_char_threshold):
         <mark style="color: {MARK_COLOR}; background-color:{MARK_BACKGROUND_COLOR}">{text[start: end]}</mark>
         {text[after_start: after_end]}{dots_after}
     """
-    
 
-# Finding Matching Documents on the givem Keyword and Entity/Tag
+
+def set_defaultdict():
+    """A helper function which returns a defaultdict of sets"""
+    return defaultdict(set)
+
+
+# Finding matching documents on the given keyword and entity/tag using reverse index
 def find_matching_documents(keyword, entity_name):
-    """Display the dataframe where the keyword appears on the frontend html page.
-    keyword: a keyword to search documents. It can be a
-    entity: a mode of search. Depending on the mode, this function calls different functions.
+    """
+    Display a table of documents in which a particular keyword, matching a 
+    particular entity type occurs.
+
+    Parameters
+    ----------
+    keyword : str
+        A keyword to search relevant documents.
+    entity_name : str
+        The entity for which user requested the keyword to match with.
+
+    Returns
+    -------
+    matching_documents : dict
+        A defaultdict with keys as count and values as dictionaries with
+        document details.
 
     """
     matching_documents = defaultdict(dict)
@@ -87,25 +136,45 @@ def find_matching_documents(keyword, entity_name):
     # Extract paragraph from a matching document
     count = 0
 
-    for i, doc in enumerate(corpus):
-        for entity in doc["entities"]:
-            if entity["label"] == entity_name:
-                if keyword.lower() in entity["text"].lower():
-                    start, end = entity["span"]
-                    matching_documents[count]["doc_match"] = get_document_text(
-                        doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
-                    )
-                    try:
-                        matching_documents[count]["doc_link"] = doc["url"]
-                    except KeyError:
-                        matching_documents[count]["doc_link"] = "None"
+    keyword = normalize_entity_text(keyword, entity_name)
 
-                    break
-        count += 1
+    displayed_docs = set()
+
+    for entity_value in reverse_index[entity_name].keys():
+        if keyword in entity_value:
+            for rel_doc_id in reverse_index[entity_name][entity_value]:
+                if rel_doc_id in displayed_docs:
+                    continue
+                displayed_entities = defaultdict(set_defaultdict)
+                doc = corpus[rel_doc_id]
+                text_match = ""
+                hr = ""
+                for entity in doc["entities"]:
+                    if (entity["label"] == entity_name and
+                        keyword in normalize_entity_text(entity["text"], entity_name) and
+                        tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"] and
+                        normalize_entity_text(entity["text"], entity_name) not in displayed_entities[rel_doc_id]["entities"]):
+                        displayed_entities[rel_doc_id]["spans"].add(tuple(entity["span"]))
+                        displayed_entities[rel_doc_id]["entities"].add(normalize_entity_text(entity["text"], entity_name))
+                        start, end = entity["span"]
+                        text_match += f"""
+                            {hr}{get_document_text(
+                                doc["text"], start, end, DOC_TEXT_CHARACTER_THRESHOLD
+                            )}<br>
+                        """
+                        hr = """<hr class="dashed">"""
+                displayed_docs.add(rel_doc_id)
+                matching_documents[count]["doc_match"] = text_match
+                try:
+                    matching_documents[count]["doc_link"] = doc["url"]
+                except KeyError:
+                    matching_documents[count]["doc_link"] = "None"
+
+            count += 1
     return matching_documents
 
 
-def create_row(dictionary):
+def create_rows(dictionary):
     i = 0
     output_html = ""
 
@@ -134,7 +203,7 @@ def put_in_table(doc_dict):
                     </tr>
                 </thead>
                 <tbody>
-                    {create_row(doc_dict)}
+                    {create_rows(doc_dict)}
                 </tbody>
             </table>
         """
