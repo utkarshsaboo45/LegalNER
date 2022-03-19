@@ -9,7 +9,11 @@ from fastapi.responses import FileResponse, HTMLResponse
 import uvicorn
 
 app = FastAPI()
+
+# No. of characters to be displayed before and after the tagged entity
 DOC_TEXT_CHARACTER_THRESHOLD = 100
+
+# Colors to highlight entities on the frontend
 MARK_COLOR = "black"
 entity_color_dict = {
     "COURT_NAME": "#FFA39E",
@@ -25,6 +29,7 @@ entity_color_dict = {
 }
 
 
+
 def read_corpus(path):
     """Given a path, open a json file and return a list of dictionaries."""
     f = open(path, encoding="utf-8")
@@ -33,7 +38,7 @@ def read_corpus(path):
     return corpus
 
 
-# Load corpora
+# Load corpora and reverse index
 annotations_path = "../../src/data/annotations_cleaned.json"
 reverse_index_path = "../../src/data/reverse_index.json"
 
@@ -97,6 +102,20 @@ def normalize_entity_text(entity_text, entity):
 
 
 def get_color_for_entity(entity):
+    """
+    Get highlight color for the entity to be displayed on frontend.
+
+    Parameters
+    ----------
+    entity : str
+        The entity for which the color is to be chosen.
+
+    Returns
+    -------
+    str
+        The highlight color for the specified entity.
+
+    """
     try:
         return entity_color_dict[entity]
     except:
@@ -110,19 +129,19 @@ def get_document_text(text, entity_name, start, end, doc_text_char_threshold):
     Parameters
     ----------
     text : str
-         text of the matched document.
+         Text of the matched document.
         
     entity_name : str
-        entity to be highlighed.
+        Entity to be highlighed.
     
     start : int
-        start of the span 
+        Start index of the entity.
         
     end : int
-        end of the span
+        End index of the entity.
         
     doc_text_char_threshold : int
-        number of documents to be returned
+        Number of characters to be displayed before and after the tagged entity.
     
 
     Returns
@@ -236,6 +255,22 @@ def find_matching_documents(keywords, entities):
 
 
 def create_rows(dictionary):
+    """
+    Create rows from matching documents to populate data in the table
+
+    Parameters
+    ----------
+    dictionary : dict
+        A dictionary of all the documents that need to be displayed, where keys
+        are document index and values are dictionaries with individual columns
+        of the table.
+
+    Returns
+    -------
+    output_html : str
+        A string with formatted HTML text to insert rows in the table.
+
+    """
     i = 0
     output_html = ""
     
@@ -253,8 +288,25 @@ def create_rows(dictionary):
 
 
 def put_in_table(doc_dict):
+    """
+    Convert a dictionary to HTML formatted string to be used on the frontend.
+
+    Parameters
+    ----------
+    doc_dict : dict
+        A dictionary of all the documents that need to be displayed, where keys
+        are document index and values are dictionaries with individual columns
+        of the table.
+
+    Returns
+    -------
+    str
+        HTML formatted string to be used on the frontend.
+
+    """
     return f"""
-            <br><table class="table table-hover table-striped">
+            <br>
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -265,7 +317,7 @@ def put_in_table(doc_dict):
                 <tbody>
                     {create_rows(doc_dict)}
                 </tbody>
-            </table><br><br>><br><br>
+            </table><br><br><br><br>
         """
 
 

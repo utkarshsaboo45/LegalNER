@@ -13,6 +13,11 @@ from slugify import slugify
 from interannotator_agreement import extract_relevant_fields
 
 
+ANNOTATIONS_PATH = "data/annotations.json"
+URL_DICT_PATH = "data/url_dict.json"
+CLEANED_ANNOTATIONS_JSON_PATH = "data/annotations_cleaned.json"
+
+
 def get_doc_content_to_name_dict(filename):
     """
     Returns a dictionary with the first few characters of a document
@@ -105,9 +110,9 @@ def link_url_to_doc(docs, urls, dict_un_slugify_urls, dict_doc_content_to_name):
     
 
 if __name__ == "__main__":
-    with open("data/annotations.json", "r", encoding="utf-8") as f:
+    with open(ANNOTATIONS_PATH, "r", encoding="utf-8") as f:
         docs = json.load(f)
-    with open("data/url_dict.json", "r", encoding="utf-8") as f:
+    with open(URL_DICT_PATH, "r", encoding="utf-8") as f:
         urls = json.load(f)
 
     dict_doc_content_to_name = get_doc_content_to_name_dict("data/judgements.zip")
@@ -119,7 +124,7 @@ if __name__ == "__main__":
         dict_doc_content_to_name
     )
 
-    with open("data/annotations_cleaned.json", "w", encoding="utf-8") as f:
+    with open(CLEANED_ANNOTATIONS_JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(docs_with_urls, f, indent=4)
     print("Saved cleaned annotations!")
     
