@@ -27,7 +27,6 @@
         }
     </script>
     <title>British Columbia Legal Documents NER Annotations</title>
-
     <link rel="shortcut icon" type="image/x-icon" href="bc_logo.png">
 </head>
 
@@ -42,14 +41,18 @@
                 <li class="nav-item"><a href="#" onClick="window.location.reload()"
                         class="nav-link link-dark px-2 active" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item"><a href="#" onclick="update_about_form();"
+                <form action="/about/" id="about-form">
+                <li class="nav-item"><a href="#" onClick="update_about_form();"
                         class="nav-link link-dark px-2">About</a></li>
-                <li class="nav-item"><a href="#" onclick="update_usage_form();"
+                </form>
+                <form action="/usage/" id="usage-form">
+                    
+                <li class="nav-item"><a href="#" onClick="update_usage_form();"
                         class="nav-link link-dark px-2">Usage</a></li>
+                </form>
             </ul>
         </div>
-    </nav>
-
+    </nav>      
     <div>
         <header class="py-3 mt-4">
             <div class="container d-flex flex-wrap justify-content-center">
