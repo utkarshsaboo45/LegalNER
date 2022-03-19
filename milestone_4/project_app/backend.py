@@ -104,6 +104,34 @@ def get_color_for_entity(entity):
 
 
 def get_document_text(text, entity_name, start, end, doc_text_char_threshold):
+    """
+    Fetches some text of the matched document with words around the start and end of the span of matched keyword
+
+    Parameters
+    ----------
+    text : str
+         text of the matched document.
+        
+    entity_name : str
+        entity to be highlighed.
+    
+    start : int
+        start of the span 
+        
+    end : int
+        end of the span
+        
+    doc_text_char_threshold : int
+        number of documents to be returned
+    
+
+    Returns
+    -------
+    dictionary
+            matched documents
+
+    """
+    
     before_start = start - doc_text_char_threshold
     before_end = start
     after_start = end
