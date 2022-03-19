@@ -185,7 +185,7 @@ def find_matching_documents(keywords, entities):
         keyword = normalize_entity_text(keyword, entity_name)
         docs_to_display = set()
         for entity_value in reverse_index[entity_name].keys():
-            if keyword in entity_value:
+            if keyword in entity_value or keyword == "":
                 for rel_doc_id in reverse_index[entity_name][entity_value]:
                     if rel_doc_id in docs_to_display:
                         continue
@@ -198,17 +198,17 @@ def find_matching_documents(keywords, entities):
     count = 0
 
     # Extract paragraph from a matching document
-    for keyword, entity_name in zip(keywords, entities):
-        keyword = normalize_entity_text(keyword, entity_name)
-        for rel_doc_id in merged_docs_to_display:
-            displayed_entities = defaultdict(set_defaultdict)
-            doc = corpus[rel_doc_id]
-            text_match = ""
-            hr = ""
+    for rel_doc_id in merged_docs_to_display:
+        displayed_entities = defaultdict(set_defaultdict)
+        doc = corpus[rel_doc_id]
+        text_match = ""
+        hr = ""
+        for keyword, entity_name in zip(keywords, entities):
+            keyword = normalize_entity_text(keyword, entity_name)
             for entity in doc["entities"]:
                 if (
                     entity["label"] == entity_name
-                    and keyword in normalize_entity_text(entity["text"], entity_name)
+                    and (keyword in normalize_entity_text(entity["text"], entity_name) or keyword == "")
                     and tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"]
                     and normalize_entity_text(entity["text"], entity_name)
                     not in displayed_entities[rel_doc_id]["entities"]
@@ -224,13 +224,13 @@ def find_matching_documents(keywords, entities):
                         )}<br>
                     """
                     hr = """<hr class="dashed">"""
-            matching_documents[count]["doc_match"] = text_match
-            try:
-                matching_documents[count]["doc_link"] = doc["url"]
-            except KeyError:
-                matching_documents[count]["doc_link"] = "None"
+        matching_documents[count]["doc_match"] = text_match
+        try:
+            matching_documents[count]["doc_link"] = doc["url"]
+        except KeyError:
+            matching_documents[count]["doc_link"] = "None"
 
-            count += 1
+        count += 1
 
     return matching_documents
 
