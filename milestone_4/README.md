@@ -8,7 +8,7 @@ This is the readme file for Milestone 4. The following links are provided as a p
 ## 2. HTML
 - [frontend.html](https://github.ubc.ca/us45/COLX_523_group3/blob/master/interface/frontend.html)
 - [about.html](https://github.ubc.ca/us45/COLX_523_group3/blob/master/interface/about.html)
-- [usege.html](https://github.ubc.ca/us45/COLX_523_group3/blob/master/interface/usage.html)
+- [usage.html](https://github.ubc.ca/us45/COLX_523_group3/blob/master/interface/usage.html)
 
 ## 3. Javascript and CSS
 - [frontend.js](https://github.ubc.ca/us45/COLX_523_group3/blob/master/interface/frontend.js)
