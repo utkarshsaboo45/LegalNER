@@ -1,6 +1,12 @@
 <html>
 
 <head>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,7 +91,7 @@
                                     <option name="entity" value="DATE_HEARING" checked> Date of hearing
                                 </select>
                             </div>
-                            <input type="text" class="form-control" name="keyword" class="search" placeholder="keyword">
+                            <input type="text" id = "keyword-bar" class="form-control" name="keyword" class="search" placeholder="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-primary btn-success" type="button" id="rowAdder">add</button>
                             </div>
