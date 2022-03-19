@@ -39,8 +39,8 @@ def read_corpus(path):
 
 
 # Load corpora and reverse index
-annotations_path = "../../src/data/annotations_cleaned.json"
-reverse_index_path = "../../src/data/reverse_index.json"
+annotations_path = "annotations_cleaned.json"
+reverse_index_path = "reverse_index.json"
 
 corpus = read_corpus(annotations_path)
 reverse_index = read_corpus(reverse_index_path)
