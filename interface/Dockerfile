@@ -1,6 +1,6 @@
 FROM python:3.8-slim-buster
 
-WORKDIR "/Users/snehajhaveri/Documents/Legal_App"
+WORKDIR "/interface"
 
 COPY requirements.txt ./
 
