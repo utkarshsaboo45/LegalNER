@@ -238,7 +238,7 @@ def find_matching_documents(keywords, entities):
 def create_rows(dictionary):
     i = 0
     output_html = ""
-
+    
     for columns in dictionary.values():
         i += 1
         output_html += "<tr>"
@@ -254,7 +254,7 @@ def create_rows(dictionary):
 
 def put_in_table(doc_dict):
     return f"""
-            <table class="table table-hover table-striped">
+            <br><table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -265,7 +265,7 @@ def put_in_table(doc_dict):
                 <tbody>
                     {create_rows(doc_dict)}
                 </tbody>
-            </table>
+            </table><br><br>><br><br>
         """
 
 

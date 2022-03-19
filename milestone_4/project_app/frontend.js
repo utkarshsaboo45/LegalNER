@@ -47,3 +47,15 @@ function update_usage_form() {
 	xmlHttpRqst.open("GET", "/usage/?" + queryString);
 	xmlHttpRqst.send();
 }
+
+
+
+var input = document.getElementById("keyword-bar");
+input.addEventListener("keyup", function(event) {
+if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("submit-button").click();
+  }
+});
