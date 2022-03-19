@@ -1,9 +1,11 @@
 FROM python:3.8-slim-buster
 
-COPY . .
+WORKDIR "/Users/snehajhaveri/Documents/Legal_App"
+
+COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
 
-WORKDIR "/milestone_4/project_app"
+COPY . .
 
 CMD ["python", "backend.py"]
