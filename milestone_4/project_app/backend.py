@@ -170,13 +170,13 @@ def find_matching_documents(keywords, entities):
     count = 0
 
     # Extract paragraph from a matching document
-    for keyword, entity_name in zip(keywords, entities):
-        keyword = normalize_entity_text(keyword, entity_name)
-        for rel_doc_id in merged_docs_to_display:
-            displayed_entities = defaultdict(set_defaultdict)
-            doc = corpus[rel_doc_id]
-            text_match = ""
-            hr = ""
+    for rel_doc_id in merged_docs_to_display:
+        displayed_entities = defaultdict(set_defaultdict)
+        doc = corpus[rel_doc_id]
+        text_match = ""
+        hr = ""
+        for keyword, entity_name in zip(keywords, entities):
+            keyword = normalize_entity_text(keyword, entity_name)
             for entity in doc["entities"]:
                 if (
                     entity["label"] == entity_name
@@ -196,13 +196,13 @@ def find_matching_documents(keywords, entities):
                         )}<br>
                     """
                     hr = """<hr class="dashed">"""
-            matching_documents[count]["doc_match"] = text_match
-            try:
-                matching_documents[count]["doc_link"] = doc["url"]
-            except KeyError:
-                matching_documents[count]["doc_link"] = "None"
+        matching_documents[count]["doc_match"] = text_match
+        try:
+            matching_documents[count]["doc_link"] = doc["url"]
+        except KeyError:
+            matching_documents[count]["doc_link"] = "None"
 
-            count += 1
+        count += 1
 
     return matching_documents
 
