@@ -157,7 +157,7 @@ def find_matching_documents(keywords, entities):
         keyword = normalize_entity_text(keyword, entity_name)
         docs_to_display = set()
         for entity_value in reverse_index[entity_name].keys():
-            if keyword in entity_value:
+            if keyword in entity_value or keyword == "":
                 for rel_doc_id in reverse_index[entity_name][entity_value]:
                     if rel_doc_id in docs_to_display:
                         continue
@@ -180,7 +180,7 @@ def find_matching_documents(keywords, entities):
             for entity in doc["entities"]:
                 if (
                     entity["label"] == entity_name
-                    and keyword in normalize_entity_text(entity["text"], entity_name)
+                    and (keyword in normalize_entity_text(entity["text"], entity_name) or keyword == "")
                     and tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"]
                     and normalize_entity_text(entity["text"], entity_name)
                     not in displayed_entities[rel_doc_id]["entities"]
