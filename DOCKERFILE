@@ -4,6 +4,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-WORKDIR "/interface"
+WORKDIR "/milestone_4/project_app"
 
 CMD ["python", "backend.py"]
