@@ -2,10 +2,12 @@
 
 <head>
     <style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -48,17 +50,17 @@
                         class="nav-link link-dark px-2 active" aria-current="page">Home</a>
                 </li>
                 <form action="/about/" id="about-form">
-                <li class="nav-item"><a href="#" onClick="update_about_form();"
-                        class="nav-link link-dark px-2">About</a></li>
+                    <li class="nav-item"><a href="#" onClick="update_about_form();"
+                            class="nav-link link-dark px-2">About</a></li>
                 </form>
                 <form action="/usage/" id="usage-form">
-                    
-                <li class="nav-item"><a href="#" onClick="update_usage_form();"
-                        class="nav-link link-dark px-2">Usage</a></li>
+
+                    <li class="nav-item"><a href="#" onClick="update_usage_form();"
+                            class="nav-link link-dark px-2">Usage</a></li>
                 </form>
             </ul>
         </div>
-    </nav>      
+    </nav>
     <div>
         <header class="py-3 mt-4">
             <div class="container d-flex flex-wrap justify-content-center">
@@ -91,7 +93,8 @@
                                     <option name="entity" value="DATE_HEARING" checked> Date of hearing
                                 </select>
                             </div>
-                            <input type="text" id = "keyword-bar" class="form-control" name="keyword" class="search" placeholder="keyword">
+                            <input type="text" id="keyword-bar" class="form-control" name="keyword" class="search"
+                                placeholder="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-primary btn-success" type="button" id="rowAdder">add</button>
                             </div>
@@ -104,10 +107,8 @@
                     </div>
             </form>
         </div>
+        <div class="container" id="maintext"></div>
     </div>
-    <div class="container" id="maintext">
-    </div>
-
 </body>
 
 <script type="text/javascript">
@@ -137,6 +138,15 @@
     $("body").on("click", "#DeleteRow", function () {
         $(this).parents("#removable").remove();
     })
+
+    $('#keyword-bar').keypress(function (e) {
+        var key = e.which;
+        if (key == 13)  // the enter key code
+        {
+            $('#submit-button').click();
+            return false;
+        }
+    }); 
 </script>
 
 </html>
