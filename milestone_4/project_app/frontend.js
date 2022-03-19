@@ -25,7 +25,7 @@ function update_page() {
 
 }
 
-function update_about_form() {
+function update_about_form() {                         
 	var form = document.getElementById("about-form");
 	var formData = new FormData(form);
 	var searchParams = new URLSearchParams(formData);
