@@ -19,13 +19,13 @@ We have used FastAPI and Uvicorn with Python to implement the interface's backen
 
 ### 1.1 backend.py
 
-- This file implements the interface's functionality, using FastAPI that responds to HTTP "GET" requests from a browser. The code is broken down into functions with proper documentation.
+- This file implements the interface's functionality, using FastAPI that responds to HTTP "GET" requests from a browser. The code is broken down into functions with proper documentation
 
 - Here are few of the main functions that we have worked on :
 
-    -  `read_corpus()` - Given a path, open a json file and return a list of dictionaries.
+    -  `read_corpus()` - Given a path, open a json file and return a list of dictionaries
     -  `normalize_entity_text()` - Normalizes a piece of text by removing everything apart from alphanumeric
-    and lowercases it.
+    and lowercases it
     -  `get_document_text()` - Fetches some text of the matched document with words around the start and end of the span
     -  `find_matching_documents()` - Display a table of documents in which a particular keyword, matching a particular entity type occurs
     
@@ -39,17 +39,17 @@ We have used FastAPI and Uvicorn with Python to implement the interface's backen
 
 - `<form action="/about/" id="about-form">`  with  `onclick="update_about_form()"`  and  `<form action="/usage/" id="usage-form">`  with `onclick="update_usage_form()"`  invoke appropriate javascript functions. 
 
-- When the submit button is pressed, `class="submit-button"` first checks if the keyword was typed, and if it was typed  - uses `update_page()`, else - asks to "Enter a keyword to search!".
+- When the user submits the form, `class="submit-button"` calls `update_page()`.
 
 ### 2.2 frontend.js
     
 The `frontend.js` is a javascript file that communicates between the `frontend.html` and the `backend.py`. It contains the following functions:
 
-- `insert_result` - inserts results to the `<maintext>` section of frontend.html 
-- `insert_result_container` - inserts results to the `<container>` section of frontend.html 
-- `update_page`  - updates the Main page of the frontend interface
-- `update_about_form` - updates the About page of the frontend interface
-- `update_usage_form` - updates the Usage page of the frontend interface
+- `insert_result()` - inserts results to the `<maintext>` section of frontend.html 
+- `insert_result_container()` - inserts results to the `<container>` section of frontend.html 
+- `update_page()`  - updates the Main page of the frontend interface
+- `update_about_form()` - updates the About page of the frontend interface
+- `update_usage_form()` - updates the Usage page of the frontend interface
 
 ### 2.3 frontend.css
 
