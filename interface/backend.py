@@ -309,9 +309,9 @@ def put_in_table(doc_dict):
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Matched Documents</th>
-                        <th scope="col">Judgement Link</th>
+                        <th scope="col" data-field="id">#</th>
+                        <th scope="col" data-field="text">Matched Documents</th>
+                        <th scope="col" data-field="url">Judgement Link</th>
                     </tr>
                 </thead>
                 <tbody>
