@@ -96,7 +96,7 @@ def normalize_entity_text(entity_text, entity):
             date = str(parser.parse(entity_text))[:10]
             return date
         except:
-            entity_text
+            return entity_text
     else:
         return re.sub(r"[^a-zA-Z0-9]+", "", entity_text).lower()
 
@@ -185,10 +185,11 @@ def find_matching_documents(keywords, entities):
 
     Parameters
     ----------
-    keyword : str
-        A keyword to search relevant documents.
-    entity_name : str
-        The entity for which user requested the keyword to match with.
+    keyword : list
+        A list of keywords to search relevant documents.
+    entity_name : list
+        A list of corresponding entities for which user requested the keywords
+        to match with.
 
     Returns
     -------
@@ -201,10 +202,11 @@ def find_matching_documents(keywords, entities):
     docs_to_display_list = []
 
     for keyword, entity_name in zip(keywords, entities):
+        raw_keyword = keyword
         keyword = normalize_entity_text(keyword, entity_name)
         docs_to_display = set()
         for entity_value in reverse_index[entity_name].keys():
-            if keyword in entity_value or keyword == "":
+            if keyword is None or keyword in entity_value or raw_keyword in entity_value or keyword == "":
                 for rel_doc_id in reverse_index[entity_name][entity_value]:
                     if rel_doc_id in docs_to_display:
                         continue
@@ -223,11 +225,15 @@ def find_matching_documents(keywords, entities):
         text_match = ""
         hr = ""
         for keyword, entity_name in zip(keywords, entities):
+            raw_keyword = keyword
             keyword = normalize_entity_text(keyword, entity_name)
             for entity in doc["entities"]:
                 if (
                     entity["label"] == entity_name
-                    and (keyword in normalize_entity_text(entity["text"], entity_name) or keyword == "")
+                    and (keyword is None or
+                         keyword in normalize_entity_text(entity["text"], entity_name) or
+                         raw_keyword in normalize_entity_text(entity["text"], entity_name) or
+                         keyword == "")
                     and tuple(entity["span"]) not in displayed_entities[rel_doc_id]["spans"]
                     and normalize_entity_text(entity["text"], entity_name)
                     not in displayed_entities[rel_doc_id]["entities"]
