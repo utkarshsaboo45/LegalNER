@@ -15,7 +15,7 @@ from interannotator_agreement import extract_relevant_fields
 
 ANNOTATIONS_PATH = "data/annotations.json"
 URL_DICT_PATH = "data/url_dict.json"
-CLEANED_ANNOTATIONS_JSON_PATH = "data/annotations_cleaned.json"
+CLEANED_ANNOTATIONS_JSON_PATH = "../interface/annotations_cleaned.json"
 
 
 def get_doc_content_to_name_dict(filename):
@@ -41,9 +41,9 @@ def get_doc_content_to_name_dict(filename):
 
     for judgement_doc in archive.namelist():
         doc_name = judgement_doc.split("/")[-1].replace(".txt", "")
-        text = archive.read(judgement_doc).decode('utf-8')
-        if not "/Badr/" in judgement_doc:
-            dict_doc_content_to_name[re.sub("[^\S]+", "", text)[:100].lower()] = doc_name
+        text = archive.read(judgement_doc).decode('utf-8', errors="ignore")
+        # if not "/Badr/" in judgement_doc:
+        dict_doc_content_to_name[re.sub("[^\S]+", "", text)[:100].lower()] = doc_name
 
     return dict_doc_content_to_name
 

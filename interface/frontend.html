@@ -130,14 +130,14 @@
         $("body").on("click", "#DeleteRow", function () {
             $(this).parents("#removable").remove();
         })
-    
-        $('#keyword-bar').keypress(function (e) {
+
+        $("#newinput").on("keypress", "input", function (e) {
             var key = e.which;
             if (key == 13)  // the enter key code
             {
                 $('#submit-button').click();
                 return false;
             }
-        }); 
+        })
     </script>
 </html>
