@@ -1,6 +1,10 @@
 function insert_result(response) {
 	var maintext = document.getElementById("maintext");
 	maintext.innerHTML = response;
+	$('#maintext > table').DataTable({
+		"pageLength": 5,
+		"lengthMenu": [[1, 5, 10, 15, 20, 50, -1], [1, 5, 10, 15, 20, 50, "All"]]
+	});
 }
 
 
@@ -48,15 +52,4 @@ function update_usage_form() {
 	xmlHttpRqst.send();
 }
 
-
-var input = document.getElementById("keyword-bar");
-
-input.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("submit-button").click();
-    }
-});
 

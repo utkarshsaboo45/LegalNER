@@ -306,7 +306,7 @@ def put_in_table(doc_dict):
     """
     return f"""
             <br>
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped" id="mytable">
                 <thead>
                     <tr>
                         <th scope="col" data-field="id">#</th>
