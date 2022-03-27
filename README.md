@@ -55,7 +55,7 @@ __Debugging:__
 
 - Once you submit a successful query, you will notice a table with a few documents returned.
 - The column `Matched Document` returns unique instances of the occurrence of a particular keyword for a given entity for every document.
-- The column `Judgement link` takes you to the actual Court Judgement document of the match on the [BC Law webpage](https://www.bclaws.gov.bc.ca) in case the user wants to know more about the case.
+- The column `Judgement link` takes you to the actual Court Judgement document of the match on the [BCCourts Judgement Page](https://www.bccourts.ca/search_judgments.aspx) in case the user wants to know more about the case.
 
 #### 2.3. To know more about the project
 
